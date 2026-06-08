@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Victory Cine</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================
+   BASE
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    height:100%;
+    overflow:hidden;
+    background:black;
+    font-family:'Inter', sans-serif;
+}
+
+/* =========================
+   LOGO (RESTAURADO + INTRO)
+========================= */
+
+.logo{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:240px;
+
+    transform:translate(-50%, -50%) scale(2);
+
+    opacity:0;
+
+    z-index:10000;
+
+    transition:
+        top 1.2s cubic-bezier(.2,.8,.2,1),
+        left 1.2s cubic-bezier(.2,.8,.2,1),
+        transform 1.2s cubic-bezier(.2,.8,.2,1),
+        opacity 1.2s ease;
+}
+
+/* intro fade */
+.logo.intro{
+    opacity:1;
+}
+
+/* estado centrado después de intro */
+.logo.center{
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(1.6);
+}
+
+/* estado sidebar */
+.logo.small{
+    top:calc(100% - 50px);
+    left:50px;
+    transform:translate(0, -100%) scale(0.55);
+    opacity:0.25;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    width:110px;
+    height:100vh;
+    background:rgba(0,0,0,.15);
+    backdrop-filter:blur(20px);
+    border-left:1px solid rgba(255,255,255,.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.sidebar a{
+    color:white;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-size:12px;
+    letter-spacing:3px;
+    margin:25px 0;
+    opacity:.4;
+    cursor:pointer;
+    transition:.3s;
+    text-decoration:none;
+}
+
+.sidebar a:hover{ opacity:1; }
+
+/* =========================
+   SCENES
+========================= */
+
+.scene{
+    position:absolute;
+    inset:0;
+    opacity:0;
+
+    transform:
+        perspective(1400px)
+        scale(1.18)
+        translateY(40px)
+        rotateX(2deg);
+
+    filter:blur(18px) brightness(.6);
+
+    transition:all 1.4s ease;
+}
+
+.scene.active{
+    opacity:1;
+    transform:perspective(1400px) scale(1) translateY(0) rotateX(0deg);
+    filter:blur(0) brightness(1);
+    z-index:2;
+}
+
+/* video */
+.video-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:scale(1.25);
+    transition:2.2s ease;
+}
+
+.scene.active .video-bg{
+    transform:scale(1.03);
+}
+
+/* overlay */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at center, rgba(0,0,0,.25), rgba(0,0,0,.65));
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    position:relative;
+    z-index:5;
+    height:100%;
+    width:85%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding-left:90px;
+    color:white;
+}
+
+.section-title{
+    font-family:'Syne', sans-serif;
+    font-size:3.2rem;
+    font-weight:400;
+    letter-spacing:-1px;
+    margin-bottom:60px;
+}
+
+.content p{
+    font-family:'Inter', sans-serif;
+    font-size:1.15rem;
+    line-height:1.9;
+    font-weight:300;
+    max-width:900px;
+    opacity:.95;
+}
+
+/* =========================
+   PRODUCTIONS (NUEVO)
+========================= */
+
+.films-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    max-width:1050px;
+}
+
+.film-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    border-radius:6px;
+    transition:.4s;
+}
+
+.film-card img{
+    width:100%;
+    height:340px;
+    object-fit:cover;
+    transition:.6s;
+}
+
+/* hover cinematic */
+.film-card:hover{
+    transform:translateY(-10px) scale(1.03);
+}
+
+.film-card:hover img{
+    transform:scale(1.15);
+    filter:brightness(1.2) contrast(1.1);
+}
+
+.film-label{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+
+    padding:18px 14px 12px;
+
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.95),
+        rgba(0,0,0,.75),
+        rgba(0,0,0,0)
+    );
+
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    text-align:left;
+}
+
+.section-title,
+.film-label{
+    text-rendering:optimizeLegibility;
+}
+
+/* =========================
+   CONTACT (RESTAURADO)
+========================= */
+
+/* =========================
+   CONTACT
+========================= */
+
+form{
+    width:500px;
+    display:flex;
+    flex-direction:column;
+}
+
+input,
+textarea{
+    margin-bottom:15px;
+    padding:16px;
+
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.15);
+
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:300;
+    letter-spacing:.5px;
+
+    outline:none;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+    border-color:rgba(255,255,255,.35);
+    background:rgba(255,255,255,.08);
+}
+
+textarea{
+    min-height:120px;
+    resize:none;
+}
+
+button{
+    padding:16px;
+
+    background:white;
+    color:black;
+
+    border:none;
+
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    background:#eaeaea;
+}
+
+.social{
+    margin-top:35px;
+}
+
+.social a{
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    margin-right:25px;
+
+    text-decoration:none;
+
+    opacity:.6;
+
+    transition:.3s;
+}
+
+.social a:hover{
+    opacity:1;
+}
+
+	
+	
+	/* =========================
+   FILM DETAIL PAGES
+========================= */
+
+.film-detail{
+    justify-content:flex-start;
+
+    overflow-y:auto;
+
+    padding-top:60px;
+    padding-bottom:60px;
+}
+
+	.film-detail::-webkit-scrollbar{
+    display:none;
+}
+
+.film-detail{
+    scrollbar-width:none;
+}
+	
+	
+.film-title{
+    font-family:'Syne', sans-serif;
+    font-size:3.2rem;
+    font-weight:400;
+    letter-spacing:-1px;
+    margin-bottom:25px;
+}
+.back-button{
+    position:absolute;
+    top:80px;
+    right:140px;
+
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    opacity:.45;
+    cursor:pointer;
+}
+
+.back-button:hover{
+    opacity:1;
+}
+
+/* bloque trailer + texto */
+
+.film-top{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+
+    margin-bottom:30px;
+    max-width:1300px;
+}
+
+.trailer-container{
+    flex:0 0 520px;
+}
+
+.trailer-container iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    border-radius:6px;
+}
+
+.film-info{
+    flex:1;
+    max-width:600px;
+}
+
+.film-info h3{
+    font-family:'Syne', sans-serif;
+    font-size:1.4rem;
+    font-weight:400;
+    margin-bottom:12px;
+    margin-top:20px;
+}
+
+.film-info p{
+    font-size:1rem;
+    line-height:1.8;
+    opacity:.9;
+}
+
+/* =========================
+   GALLERY CAROUSEL
+========================= */
+
+.gallery-section{
+    margin-top:20px;
+    max-width:1300px;
+}
+
+.gallery-title{
+    font-family:'Syne', sans-serif;
+    font-size:1.5rem;
+    margin-bottom:20px;
+}
+
+	
+	.gallery-wrapper{
+    position:relative;
+    max-width:1180px;
+}
+
+.gallery-slider{
+    display:flex;
+    gap:15px;
+
+    overflow:hidden;
+
+    scroll-behavior:smooth;
+}
+
+.gallery-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:42px;
+    height:42px;
+
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(0,0,0,.4);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+
+    z-index:10;
+}
+
+.gallery-arrow:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.gallery-left{
+    left:-60px;
+}
+
+.gallery-right{
+    right:-60px;
+}
+	
+	
+
+
+
+.gallery-thumb{
+    flex:0 0 150px;
+    height:90px;
+}
+	
+.gallery-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.gallery-thumb:hover img{
+    transform:scale(1.08);
+}
+
+/* modal fotos */
+
+.image-modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.95);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:50000;
+}
+
+.image-modal.active{
+    display:flex;
+}
+
+.image-modal img{
+    max-width:90%;
+    max-height:90%;
+    object-fit:contain;
+}
+
+.close-image{
+    position:absolute;
+    top:30px;
+    right:40px;
+
+    font-size:50px;
+    color:white;
+
+    cursor:pointer;
+}
+
+.gallery-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    font-size:60px;
+    color:white;
+
+    cursor:pointer;
+    user-select:none;
+
+    padding:20px;
+}
+
+.gallery-prev{
+    left:20px;
+}
+
+.gallery-next{
+    right:20px;
+}
+	
+	
+	
+	
+	#introLoader{
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:200000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 1s ease, visibility 1s ease;
+}
+
+#introLoader video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* fade out */
+#introLoader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* bloquea interacción mientras carga */
+body.loading{
+    overflow:hidden;
+}
+	
+	
+	
+	.social-topright{
+    position:fixed;
+    top:25px;
+    right:140px; /* deja espacio para sidebar */
+    display:flex;
+    gap:18px;
+    z-index:99999;
+}
+
+/* base icono */
+.social-topright a{
+    width:20px;
+    height:20px;
+    display:inline-block;
+
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+
+    filter:brightness(0) invert(1); /* blanco suave */
+    opacity:.5;
+
+    transition:.35s ease;
+
+    /* leve glow elegante */
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(255,255,255,.15));
+}
+
+/* hover → color original */
+.social-topright a:hover{
+    filter:none;
+    opacity:1;
+    transform:translateY(-2px);
+}
+
+/* ICONOS */
+.social-topright .yt{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg");
+}
+
+.social-topright .ig{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg");
+}
+
+.social-topright .tt{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg");
+}
+	
+	
+	
+	
+	
+	#sentMessage{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .6s ease, visibility .6s ease;
+}
+
+/* estado activo */
+#sentMessage.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* texto cinematográfico */
+.sent-text{
+    font-family:'Syne', sans-serif;
+    font-size:2.5rem;
+    letter-spacing:6px;
+    color:white;
+    text-transform:uppercase;
+
+    opacity:0;
+    transform:scale(1.1);
+    animation:sentIn 1.2s ease forwards;
+}
+
+@keyframes sentIn{
+    0%{
+        opacity:0;
+        transform:scale(1.2);
+        filter:blur(10px);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+}
+	
+	
+</style>
+
+</head>
+
+<body class="loading">
+	
+	<div id="introLoader">
+  <video id="introVideo" autoplay muted loop playsinline preload="auto">
+    <source src="videos/intro.webm" type="video/webm">
+  </video>
+</div>
+
+<img src="logo.png" class="logo" id="logo">
+
+<nav class="sidebar">
+    <a onclick="goTo(0)">HOME</a>
+    <a onclick="goTo(1)">ABOUT</a>
+    <a onclick="goTo(2)">FILMS</a>
+    <a onclick="goTo(3)">CONTACT</a>
+</nav>
+
+<!-- SCENES -->
+
+<section class="scene active">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/inicio.mp4">
+    </video>
+</section>
+
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/about.mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+        <h2 class="section-title">About</h2>
+        <p>
+VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de las escenas de riesgo cinematográficas.
+
+<br><br>
+
+Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias.
+
+<br><br>
+
+Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.
+</p>
+    </div>
+</section>
+
+<!-- PRODUCTIONS -->
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h2 class="section-title">Films</h2>
+
+        <div class="films-grid">
+
+            <div class="film-card" onclick="goTo(4)">
+                <img src= "benjamin.png">
+                <div class="film-label">Benjamín (2006)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(5)">
+                <img src= "warriors.png">
+                <div class="film-label">Warriors (2014)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(6)">
+                <img src= "nohuiras.png">
+                <div class="film-label">No Huirás (2024)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(7)">
+                <img src= "tiempodejusticia.png">
+                <div class="film-label">Tiempo de Justicia (En rodaje)</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/contact.mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h2 class="section-title">Contact</h2>
+
+        <form>
+			   <form action="https://formspree.io/f/xzdqronj" method="POST">
+            <input placeholder="Name">
+            <input placeholder="Email">
+            <textarea placeholder="Message"></textarea>
+            <button>Send</button>
+        </form>
+
+        <div class="social">
+            <a>Instagram</a>
+            <a>IMDb</a>
+            <a>YouTube</a>
+        </div>
+    </div>
+</section>
+
+
+
+	
+	
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title">Benjamín</h1>
+
+        <div class="back-button" onclick="goTo(2)">
+            ← Back to Films
+        </div>
+
+        <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+        <h3>Project Description</h3>
+
+        <p>
+            Description here...
+        </p>
+
+        <h3>Synopsis</h3>
+
+        <p>
+            Synopsis here...
+        </p>
+
+    </div>
+
+</div>
+       <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+            <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+   
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title">Warriors</h1>
+
+        <div class="back-button" onclick="goTo(2)">
+            ← Back to Films
+        </div>
+
+        <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+        <h3>Project Description</h3>
+
+        <p>
+            Description here...
+        </p>
+
+        <h3>Synopsis</h3>
+
+        <p>
+            Synopsis here...
+        </p>
+
+    </div>
+
+</div>
+
+        <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+           <div class="gallery-thumb">
+    <img src= "gallery/poster.png" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors7.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    </div>
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title">No Huirás</h1>
+
+        <div class="back-button" onclick="goTo(2)">
+            ← Back to Films
+        </div>
+
+       <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+        <h3>Project Description</h3>
+
+        <p>
+            Description here...
+        </p>
+
+        <h3>Synopsis</h3>
+
+        <p>
+            Synopsis here...
+        </p>
+
+    </div>
+
+</div>
+
+        <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+          <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+    
+
+    </div>
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title">Tiempo de Justicia</h1>
+
+        <div class="back-button" onclick="goTo(2)">
+            ← Back to Films
+        </div>
+
+       <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+        <h3>Project Description</h3>
+
+        <p>
+            Description here...
+        </p>
+
+        <h3>Synopsis</h3>
+
+        <p>
+            Synopsis here...
+        </p>
+
+    </div>
+
+</div>
+
+       <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+            <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+    
+</section>
+	
+	
+	
+	
+	<div id="imageModal" class="image-modal">
+
+    <div
+        class="gallery-nav gallery-prev"
+        onclick="prevImage()">
+        ‹
+    </div>
+
+    <img id="modalImage">
+
+    <div
+        class="gallery-nav gallery-next"
+        onclick="nextImage()">
+        ›
+    </div>
+
+    <span
+        class="close-image"
+        onclick="closeImage()">
+        ×
+    </span>
+
+</div>
+	
+	
+	
+	
+<script>
+
+const logo = document.getElementById("logo");
+const scenes = document.querySelectorAll(".scene");
+
+let current = 0;
+let locked = false;
+
+/* INTRO LOGO */
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("introLoader");
+
+    // seguridad: evita errores si no existe
+    if (!loader) {
+        startLogoIntro();
+        return;
+    }
+
+    // fade out loader
+    setTimeout(() => {
+        loader.classList.add("hide");
+        document.body.classList.remove("loading");
+
+        setTimeout(() => {
+            loader.remove();
+        }, 1000);
+
+        // luego arranca el logo
+        startLogoIntro();
+
+    }, 800);
+});
+	
+	function startLogoIntro() {
+    setTimeout(()=>logo.classList.add("intro"),200);
+    setTimeout(()=>logo.classList.add("center"),3000);
+}
+
+/* LOGO STATE */
+function updateLogo(){
+    if(current === 0){
+        logo.classList.add("center");
+
+        logo.classList.remove("small");
+    }else{
+        logo.classList.add("small");
+        logo.classList.remove("center");
+    }
+}
+
+/* SCENES */
+function show(i){
+    scenes.forEach(s=>s.classList.remove("active"));
+    scenes[i].classList.add("active");
+    current=i;
+    updateLogo();
+}
+
+/* NAV */
+window.addEventListener("wheel",(e)=>{
+    if(locked) return;
+    locked=true;
+
+    current += (e.deltaY>0?1:-1);
+    current=Math.max(0,Math.min(scenes.length-1,current));
+
+    show(current);
+
+    setTimeout(()=>locked=false,1200);
+});
+
+function goTo(i){ show(i); }
+
+
+	
+	
+	
+	let currentGalleryImages = [];
+let currentImageIndex = 0;
+
+function openImage(src){
+
+    currentGalleryImages =
+        Array.from(
+            document.querySelectorAll('.gallery-thumb img')
+        ).map(img => img.src);
+
+    currentImageIndex =
+        currentGalleryImages.indexOf(src);
+
+    document.getElementById("modalImage").src = src;
+
+    document
+        .getElementById("imageModal")
+        .classList.add("active");
+}
+
+function closeImage(){
+
+    document
+        .getElementById("imageModal")
+        .classList.remove("active");
+}
+
+function nextImage(){
+
+    currentImageIndex++;
+
+    if(currentImageIndex >= currentGalleryImages.length){
+        currentImageIndex = 0;
+    }
+
+    document.getElementById("modalImage").src =
+        currentGalleryImages[currentImageIndex];
+}
+
+function prevImage(){
+
+    currentImageIndex--;
+
+    if(currentImageIndex < 0){
+        currentImageIndex =
+            currentGalleryImages.length - 1;
+    }
+
+    document.getElementById("modalImage").src =
+        currentGalleryImages[currentImageIndex];
+}
+
+document.addEventListener('keydown', function(e){
+
+    const modal =
+        document.getElementById("imageModal");
+
+    if(!modal.classList.contains('active')) return;
+
+    if(e.key === 'ArrowRight'){
+        nextImage();
+    }
+
+    if(e.key === 'ArrowLeft'){
+        prevImage();
+    }
+
+    if(e.key === 'Escape'){
+        closeImage();
+    }
+});
+	
+	
+	function slideGallery(btn,direction){
+
+    const wrapper =
+        btn.parentElement;
+
+    const slider =
+        wrapper.querySelector('.gallery-slider');
+
+    slider.scrollBy({
+        left: direction * 500,
+        behavior:'smooth'
+    });
+}
+	
+
+updateLogo();
+
+	
+	
+	document.querySelector("form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const sent = document.getElementById("sentMessage");
+
+    sent.classList.add("active");
+
+    // reset animación
+    const text = sent.querySelector(".sent-text");
+    text.style.animation = "none";
+    void text.offsetWidth;
+    text.style.animation = "sentIn 1.2s ease forwards";
+
+    // ocultar después de unos segundos
+    setTimeout(() => {
+        sent.classList.remove("active");
+    }, 2500);
+});
+	
+	
+	
+</script>
+
+	
+	<div class="social-topright">
+  <a href="https://youtube.com" target="_blank" class="yt"></a>
+  <a href="https://instagram.com" target="_blank" class="ig"></a>
+  <a href="https://tiktok.com" target="_blank" class="tt"></a>
+</div>
+	
+	
+	
+	<div id="sentMessage">
+    <div class="sent-text">
+        MESSAGE SENT
+    </div>
+</div>
+	
+	
+</body>
+</html>
