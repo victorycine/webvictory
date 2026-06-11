@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Victory Cine</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================
+   BASE
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    height:100%;
+    overflow:hidden;
+    background:black;
+    font-family:'Inter', sans-serif;
+}
+
+/* =========================
+   LOGO (RESTAURADO + INTRO)
+========================= */
+
+.logo{
+    position:fixed;
+    top:50%;
+    left:50%;
+    width:240px;
+
+    transform:translate(-50%, -50%) scale(2);
+
+    opacity:0.9;
+
+    z-index:10000;
+
+	mix-blend-mode:difference;
+	filter:brightness(.1);
+	
+    
+	
+	
+	transition:
+    top 1.2s cubic-bezier(.2,.8,.2,1),
+    left 1.2s cubic-bezier(.2,.8,.2,1),
+    transform 1.2s cubic-bezier(.2,.8,.2,1),
+    opacity 1.2s ease,
+    filter .4s ease,
+    mix-blend-mode .4s ease;
+	
+	
+	
+}
+
+/* intro fade */
+.logo.intro{
+    opacity:1;
+}
+
+/* estado centrado después de intro */
+.logo.center{
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%) scale(1.6);
+}
+
+/* estado sidebar */
+.logo.small{
+    top:calc(100% - 50px);
+    left:50px;
+    transform:translate(0, -100%) scale(0.55);
+    opacity:0.25;
+}
+	
+	
+	
+	.logo:hover{
+    mix-blend-mode:normal;
+
+    filter:
+        drop-shadow(0 0 3px rgba(255,255,255,.5))
+        drop-shadow(0 0 8px rgba(255,255,255,.35));
+
+    opacity:1;
+}
+	
+	
+	
+	
+	.logo.small:hover{
+    transform:translate(0, -100%) scale(1);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    right:0;
+    top:0;
+    width:110px;
+    height:100vh;
+    background:rgba(0,0,0,.15);
+    backdrop-filter:blur(20px);
+    border-left:1px solid rgba(255,255,255,.1);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:1000000;
+}
+
+.sidebar a{
+    color:white;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-size:12px;
+    letter-spacing:3px;
+    margin:25px 0;
+    opacity:.4;
+    cursor:pointer;
+    transition:.3s;
+    text-decoration:none;
+}
+
+.sidebar a:hover{ opacity:1; }
+
+	
+	
+	.lang-button{
+    position:absolute;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    color:white;
+    font-family:'Inter', sans-serif;
+    font-size:10px;
+    letter-spacing:1px;
+
+    opacity:.45;
+}
+	
+	
+	
+	
+	
+	.music-button{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:78px;
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b1b1b,
+            #050505
+        );
+
+    border:1px solid #000;
+
+    border-radius:5px;
+
+    box-shadow:
+        inset 0 2px 2px rgba(255,255,255,.08),
+        inset 0 -3px 4px rgba(0,0,0,.9),
+        0 2px 8px rgba(0,0,0,.5);
+
+    color:white;
+
+    font-size:9px;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.15s ease;
+
+    opacity:.9;
+}
+
+/* hover */
+
+.music-button:hover{
+    transform:translateX(-50%) translateY(-1px);
+}
+
+/* botón presionado */
+
+.music-button.active{
+
+    transform:
+        translateX(-50%)
+        translateY(2px);
+
+    box-shadow:
+        inset 0 4px 10px rgba(0,0,0,.95),
+        inset 0 0 10px rgba(0,0,0,.8);
+
+    background:
+        linear-gradient(
+            180deg,
+            #070707,
+            #151515
+        );
+}
+
+/* texto */
+
+.music-button span:last-child{
+    font-size:9px;
+}
+
+/* ecualizador */
+
+.music-eq{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:14px;
+}
+
+.music-eq span{
+    width:3px;
+
+    background:#666;
+
+    border-radius:2px;
+
+    transform-origin:bottom;
+
+    animation:
+        equalizer .8s infinite ease-in-out;
+}
+
+/* alturas */
+
+.music-eq span:nth-child(1){
+    height:5px;
+    animation-delay:0s;
+}
+
+.music-eq span:nth-child(2){
+    height:11px;
+    animation-delay:.15s;
+}
+
+.music-eq span:nth-child(3){
+    height:14px;
+    animation-delay:.3s;
+}
+
+.music-eq span:nth-child(4){
+    height:8px;
+    animation-delay:.45s;
+}
+
+/* colores apagado */
+
+.music-button:not(.active) .music-eq span{
+    background:#666;
+}
+
+/* colores encendido */
+
+.music-button.active .music-eq span{
+    animation:
+        equalizer .8s infinite ease-in-out,
+        vuColors 1s infinite linear;
+}
+
+/* movimiento */
+
+@keyframes equalizer{
+
+    0%{
+        transform:scaleY(.25);
+    }
+
+    25%{
+        transform:scaleY(1);
+    }
+
+    50%{
+        transform:scaleY(.45);
+    }
+
+    75%{
+        transform:scaleY(.9);
+    }
+
+    100%{
+        transform:scaleY(.25);
+    }
+}
+
+/* colores reales de consola */
+
+@keyframes vuColors{
+
+    0%{
+        background:#00ff66;
+    }
+
+    35%{
+        background:#ffe600;
+    }
+
+    70%{
+        background:#ff2b2b;
+    }
+
+    100%{
+        background:#00ff66;
+    }
+}
+	
+	
+	
+	
+	
+	
+	
+
+.lang-button span{
+    cursor:pointer;
+    transition:.3s;
+}
+
+.lang-button span:hover{
+    opacity:1;
+}
+	
+	
+	
+	
+	
+	
+	.social-topright{
+    position:absolute;
+
+    top:30px;          /* más arriba */
+    left:0;
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+
+    z-index:10001;
+}
+
+	
+.social-topright a{
+    width:18px;
+    height:18px;
+    display:block;
+
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+
+    opacity:.45;
+    transition:.3s;
+}
+
+.social-topright a:hover{
+    opacity:1;
+    transform:scale(1.15);
+}
+	
+	
+	
+	.social-topright .yt,
+.social-topright .ig,
+.social-topright .tt{
+    filter:invert(1);
+}
+	
+	
+/* =========================
+   SCENES
+========================= */
+
+.scene{
+    position:absolute;
+    inset:0;
+    opacity:0;
+
+      filter: blur(18px) brightness(1);
+
+    transform:
+        perspective(1400px)
+        scale(1.18)
+        translateY(40px)
+        rotateX(2deg);
+
+    
+
+    transition:all 1.4s ease;
+}
+
+.scene.active{
+    opacity:1;
+    transform:perspective(1400px) scale(1) translateY(0) rotateX(0deg);
+    filter:blur(0) brightness(1);
+    z-index:2;
+}
+
+/* video */
+.video-bg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:scale(1.25);
+    transition:2.2s ease;
+}
+
+.scene.active .video-bg{
+    transform:scale(1.03);
+}
+
+/* overlay */
+.overlay{
+     background: transparent;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    position:absolute;
+    inset:60px 170px 60px 60px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.section-title{
+    font-family:'Inter', sans-serif;
+    font-size:3.5rem;
+    font-weight:300;
+    letter-spacing:-2px;
+    margin-bottom:60px;
+}
+
+.content p{
+    font-family:'Inter', sans-serif;
+    font-size:1.15rem;
+    line-height:1.9;
+    font-weight:300;
+    max-width:900px;
+    opacity:.95;
+}
+
+/* =========================
+   PRODUCTIONS (NUEVO)
+========================= */
+
+.films-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    max-width:1050px;
+}
+
+.film-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    border-radius:6px;
+    transition:.4s;
+}
+
+.film-card img{
+    width:100%;
+    height:340px;
+    object-fit:cover;
+    transition:.6s;
+}
+
+/* hover cinematic */
+.film-card:hover{
+    transform:translateY(-10px) scale(1.03);
+}
+
+.film-card:hover img{
+    transform:scale(1.15);
+    filter:brightness(1.2) contrast(1.1);
+}
+
+.film-label{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+
+    padding:18px 14px 12px;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase;
+
+    text-align:left;
+}
+
+.section-title,
+.film-label{
+    text-rendering:optimizeLegibility;
+}
+
+/* =========================
+   CONTACT (RESTAURADO)
+========================= */
+
+/* =========================
+   CONTACT
+========================= */
+
+form{
+    width:500px;
+    display:flex;
+    flex-direction:column;
+}
+
+input,
+textarea{
+    margin-bottom:15px;
+    padding:16px;
+
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.15);
+
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:300;
+    letter-spacing:.5px;
+
+    outline:none;
+    transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+    border-color:rgba(255,255,255,.35);
+    background:rgba(255,255,255,.08);
+}
+
+textarea{
+    min-height:120px;
+    resize:none;
+}
+
+button{
+    padding:16px;
+
+    background:white;
+    color:black;
+
+    border:none;
+
+    font-family:'Inter', sans-serif;
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+button:hover{
+    background:#eaeaea;
+}
+
+.social{
+    margin-top:10px;
+}
+
+.social a{
+    color:white;
+
+    font-family:'Inter', sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    margin-right:25px;
+
+    text-decoration:none;
+
+    opacity:.6;
+
+    transition:.3s;
+}
+
+.social a:hover{
+    opacity:1;
+}
+
+	
+	
+	/* =========================
+   FILM DETAIL PAGES
+========================= */
+
+.film-detail{
+    justify-content:flex-start;
+
+    overflow-y:auto;
+
+    padding-top:60px;
+    padding-bottom:60px;
+}
+
+	.film-detail::-webkit-scrollbar{
+    display:none;
+}
+
+.film-detail{
+    scrollbar-width:none;
+}
+	
+	
+.film-title{
+    font-family:'Inter', sans-serif;
+    font-size:3.5rem;
+    font-weight:300;
+    letter-spacing:-2px;
+    margin-bottom:25px;
+}
+.back-button{
+    position:absolute;
+    top:80px;
+    right:140px;
+
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    opacity:.45;
+    cursor:pointer;
+}
+
+.back-button:hover{
+    opacity:1;
+}
+
+/* bloque trailer + texto */
+
+.film-top{
+    display:flex;
+    gap:40px;
+    align-items:flex-start;
+
+    margin-bottom:30px;
+    max-width:1300px;
+}
+
+.trailer-container{
+    flex:0 0 520px;
+}
+
+.trailer-container iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    border-radius:6px;
+}
+
+.film-info{
+    flex:1;
+    max-width:600px;
+}
+
+.film-info h3{
+    font-family:'Inter', sans-serif;
+    font-size:1.4rem;
+    font-weight:500;
+}
+
+.film-info p{
+    font-size:1rem;
+    line-height:1.8;
+    opacity:.9;
+}
+
+/* =========================
+   GALLERY CAROUSEL
+========================= */
+
+.gallery-section{
+    margin-top:20px;
+    max-width:1300px;
+}
+
+.gallery-title{
+    font-family:'Inter', sans-serif;
+    font-size:1.5rem;
+    font-weight:300;
+    letter-spacing:-1px;
+}
+	
+	.gallery-wrapper{
+    position:relative;
+    max-width:1180px;
+}
+
+.gallery-slider{
+    display:flex;
+    gap:15px;
+
+    overflow:hidden;
+
+    scroll-behavior:smooth;
+}
+
+.gallery-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:42px;
+    height:42px;
+
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(0,0,0,.4);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+
+    z-index:10;
+}
+
+.gallery-arrow:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.gallery-left{
+    left:-60px;
+}
+
+.gallery-right{
+    right:-60px;
+}
+	
+	
+
+
+
+.gallery-thumb{
+    flex:0 0 150px;
+    height:90px;
+}
+	
+.gallery-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.gallery-thumb:hover img{
+    transform:scale(1.08);
+}
+
+/* modal fotos */
+
+.image-modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.95);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:50000;
+}
+
+.image-modal.active{
+    display:flex;
+}
+
+.image-modal img{
+    max-width:90%;
+    max-height:90%;
+    object-fit:contain;
+}
+
+.close-image{
+    position:absolute;
+    top:30px;
+    right:40px;
+
+    font-size:50px;
+    color:white;
+
+    cursor:pointer;
+}
+
+.gallery-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+
+    font-size:60px;
+    color:white;
+
+    cursor:pointer;
+    user-select:none;
+
+    padding:20px;
+}
+
+.gallery-prev{
+    left:20px;
+}
+
+.gallery-next{
+    right:20px;
+}
+	
+	
+	
+	
+	#introLoader{
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:2000000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 1s ease, visibility 1s ease;
+		 
+}
+
+#introLoader video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* fade out */
+#introLoader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+/* bloquea interacción mientras carga */
+body.loading{
+    overflow:hidden;
+}
+	
+	
+	
+.social-topright .yt{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg");
+}
+
+.social-topright .ig{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg");
+}
+
+.social-topright .tt{
+    background-image:url("https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg");
+}
+	
+	
+	
+	
+	
+	#sentMessage{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:999999;
+
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .6s ease, visibility .6s ease;
+}
+
+/* estado activo */
+#sentMessage.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* texto cinematográfico */
+.sent-text{
+    font-family:'Inter', sans-serif;
+    font-size:2.5rem;
+    font-weight:300;
+    letter-spacing:6px;
+    color:white;
+    text-transform:uppercase;
+
+    opacity:0;
+    transform:scale(1.1);
+    animation:sentIn 1.2s ease forwards;
+}
+
+@keyframes sentIn{
+    0%{
+        opacity:0;
+        transform:scale(1.2);
+        filter:blur(10px);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	#transitionBlur{
+    position:fixed;
+    top:0;
+    right:0;
+
+    width:110px;
+    height:100vh;
+
+    background:rgba(0,0,0,.15);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border-left:1px solid rgba(255,255,255,.1);
+
+    z-index:90000;
+
+    pointer-events:none;
+
+    opacity:0;
+}
+
+#transitionBlur.active{
+    animation:sidebarTransition 1.5s ease forwards;
+}
+
+@keyframes sidebarTransition{
+
+    0%{
+        width:110px;
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+        width:100vw;
+        opacity:1;
+    }
+
+    100%{
+        width:110px;
+        opacity:0;
+    }
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	.film-card{
+    opacity:0;
+    transform:translateY(35px) scale(0.96);
+    filter:blur(12px);
+    transition:all .6s ease;
+}
+
+.film-card.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+}
+	
+	body {
+    color: white;
+}
+	
+	
+	
+	
+</style>
+
+</head>
+
+<body class="loading">
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div id="transitionBlur"></div>
+	
+	<div id="introLoader">
+  <video id="introVideo" autoplay muted loop playsinline preload="auto">
+    <source src="videos/intro.webm" type="video/webm">
+  </video>
+</div>
+
+<img src="logo.png" class="logo" id="logo">
+
+<nav class="sidebar">
+   <a onclick="goTo(0)" data-i18n="home">INICIO</a>
+<a onclick="goTo(1)" data-i18n="about">NOSOTROS</a>
+<a onclick="goTo(2)" data-i18n="films">FILMS</a>
+<a onclick="goTo(3)" data-i18n="contact">CONTACTO</a>
+
+	
+	
+	<div class="social-topright">
+  <a href="https://www.youtube.com/@VICTORYCine_" target="_blank" class="yt"></a>
+  <a href="https://www.instagram.com/victorycine" target="_blank" class="ig"></a>
+  <a href="https://tiktok.com" target="_blank" class="tt"></a>
+</div>
+	
+    <div class="lang-button">
+		
+    <span onclick="changeLanguage('en')">ENG</span>
+    <span>|</span>
+    <span onclick="changeLanguage('es')">ESP</span>
+</div>
+	
+<div class="music-button" onclick="toggleMusic()">
+
+    <div class="music-eq">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <span>MUSIC</span>
+
+</div>
+	
+</nav>
+
+<!-- SCENES -->
+
+<section class="scene active">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/inicio.webm">
+    </video>
+</section>
+
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/about.webm">
+    </video>
+    <div class="overlay"></div>
+    <div class="content">
+        <h2 class="section-title" data-i18n="about">NOSOTROS</h2>
+        <p data-i18n="aboutText">
+VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de las escenas de riesgo cinematográficas.
+
+<br><br>
+
+Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias.
+
+<br><br>
+
+Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.
+</p>
+    </div>
+</section>
+
+<!-- PRODUCTIONS -->
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.webm">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="content">
+       <div class="back-button" onclick="goTo(2)" data-i18n="backFilms">
+← Volver a Films
+</div>
+
+        <div class="films-grid">
+
+            <div class="film-card" onclick="goTo(4)">
+                <img src= "benjamin.png">
+                <div class="film-label" data-i18n="film1">Benjamín (2006)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(5)">
+                <img src= "warriors.png">
+                <div class="film-label" data-i18n="film2">Warriors (2014)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(6)">
+                <img src= "nohuiras.png">
+               <div class="film-label" data-i18n="film3">No Huirás (2024)</div>
+            </div>
+
+            <div class="film-card" onclick="goTo(7)">
+                <img src= "tiempodejusticia.png">
+                <div class="film-label" data-i18n="film4">Tiempo de Justicia (En rodaje)</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/contacto.webm">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h2 class="section-title" data-i18n="contact">CONTACTO</h2>
+
+      
+			  <form action="https://formspree.io/f/xzdqronj" method="POST">
+				  <input type="hidden" name="_subject" value="Nuevo mensaje desde Victory Cine">
+    <input name="name" placeholder="Name" data-i18n-placeholder="name" required>
+<input name="email" type="email" placeholder="Email" data-i18n-placeholder="email" required>
+<textarea name="message" placeholder="Message" data-i18n-placeholder="message" required></textarea>
+<button type="submit" data-i18n="send">Send</button>
+</form>
+
+        <div class="social">
+            <a>E-mail: victoryargentina@gmail.com</a>
+            <a>Tel: +549 341 6608336 </a>
+            
+        </div>
+    </div>
+</section>
+
+
+
+	
+	
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.webm">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title" data-i18n="film1">Benjamín</h1>
+
+        <div class="back-button" onclick="goTo(2)" data-i18n="backFilms">
+← Volver a Films
+</div>
+
+        <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe
+    class="yt-player"
+    src="https://www.youtube.com/embed/VIDEO_ID?enablejsapi=1"
+    allowfullscreen>
+</iframe>
+		
+    </div>
+
+    <div class="film-info">
+
+        <h3 data-i18n="synopsis">Sinopsis</h3>
+
+        <p data-i18n="film1_synopsis">
+           Tras años atrapado en un silencio inexplicable, Benjamín vive aislado entre recuerdos fragmentados que nadie logra comprender. Mientras una verdad enterrada durante años amenaza con salir a la luz, deberá enfrentarse a quienes le arrebataron todo, guiado únicamente por su instinto, sus recuerdos y los reflejos que aún sobreviven bajo las cicatrices de su mente.
+        </p><br>
+
+		
+		<h3 data-i18n="production">Sobre la producción</h3>
+
+        <p data-i18n="film1_prod"></p>
+            Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer cine. Realizada sin experiencia ni recursos, pero con enorme pasión, se convirtió en un laboratorio creativo que terminó encontrando su público y marcó el inicio de nuestro recorrido como realizadores.
+        </p>
+
+    </div>
+
+</div>
+       <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+            <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+   
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.webm">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title" data-i18n="film2">Warriors</h1>
+
+        <div class="back-button" onclick="goTo(2)" data-i18n="backFilms">
+← Volver a Films
+</div>
+
+        <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe class="yt-player"
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+        <h3 data-i18n="synopsis">Sinopsis</h3>
+
+        <p data-i18n="film2_synopsis">
+            Pablo es un joven artista marcial que vive junto a su abuela y atraviesa una situación económica desesperada. Cuando está a punto de tomar una decisión que podría cambiar su vida para siempre, aparece Víctor, un misterioso ser espiritual que lo llevará a cuestionar todo aquello en lo que cree. Mientras intenta encontrar su verdadero camino, Pablo deberá enfrentar una profunda batalla interior entre la luz y la oscuridad.
+        </p>
+<br>
+
+        <h3 data-i18n="production">Sobre la producción</h3>
+
+        <p data-i18n="film2_prod"></p>
+            Warriors nació después de un largo recorrido de aprendizaje y crecimiento. La experiencia acumulada en cortometrajes, videoclips y producciones para terceros nos permitió afrontar un proyecto más ambicioso, con una visión cinematográfica más madura y una producción de mayor escala.<br>
+Este cortometraje reunió a actores profesionales junto a talentos locales, obtuvo reconocimiento en su ciudad de origen y fue seleccionada en festivales internacionales de cine de acción en Estados Unidos y la India.
+        </p>
+
+    </div>
+
+</div>
+
+        <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+           <div class="gallery-thumb">
+    <img src= "gallery/poster.png" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/warriors7.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    </div>
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.webm">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title" data-i18n="film3">No Huirás</h1>
+
+        <div class="back-button" onclick="goTo(2)" data-i18n="backFilms">
+← Volver a Films
+</div>
+
+       <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe class="yt-player"
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+       <h3 data-i18n="synopsis">Sinopsis</h3>
+
+        <p data-i18n="film3_synopsis">
+            Mery camina sola por calles oscuras mientras intenta llegar a su departamento antes de la medianoche. A medida que el tiempo avanza, el miedo se apodera de ella y cada paso parece acercarla a un destino inevitable. Lo que intenta dejar atrás permanece oculto... hasta que el reloj marca las doce.
+        </p><br>
+
+
+        <h3 data-i18n="production">Sobre la producción</h3>
+
+
+       <p data-i18n="film3_prod"></p>
+            Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás, una obra concebida como el primer paso hacia nuevos proyectos propios. Filmada en apenas dos jornadas, representó además nuestra primera incursión en el género de terror, alejándonos por primera vez de la acción y las artes marciales. La película fue seleccionada oficialmente en festivales de Inglaterra, Valencia y Argentina, donde tuvo su estreno nacional en el Festival Buenos Aires Rojo Sangre.
+        </p>
+
+    </div>
+
+</div>
+
+        <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+          <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+    
+
+    </div>
+</section>
+	
+	<section class="scene">
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="videos/films.webm">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="content film-detail">
+
+        <h1 class="film-title" data-i18n="film4">Tiempo de Justicia</h1>
+
+       <div class="back-button" onclick="goTo(2)" data-i18n="backFilms">
+← Volver a Films
+</div>
+
+       <div class="film-top">
+
+    <div class="trailer-container">
+        <iframe class="yt-player"
+            src="https://www.youtube.com/embed/VIDEO_ID"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="film-info">
+
+       <h3 data-i18n="synopsis">Sinopsis</h3>
+
+        <p data-i18n="film4_synopsis">
+            ...
+        </p><br>
+
+
+        <h3 data-i18n="production">Sobre la producción</h3>
+
+        <p data-i18n="film4_prod"></p>
+            Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha. Con estreno previsto para 2027, representa una nueva etapa para la productora y la consolidación de una trayectoria construida a lo largo de años de trabajo en cine y producciones audiovisuales.
+        </p>
+
+    </div>
+
+</div>
+
+       <div class="gallery-section">
+
+    <h3 class="gallery-title">
+        Stills
+    </h3>
+
+    <div class="gallery-wrapper">
+
+        <div class="gallery-arrow gallery-left"
+             onclick="slideGallery(this,-1)">
+            ‹
+        </div>
+
+        <div class="gallery-slider">
+
+            <div class="gallery-thumb">
+    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+</div>
+
+<div class="gallery-thumb">
+    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+</div>
+
+        </div>
+
+        <div class="gallery-arrow gallery-right"
+             onclick="slideGallery(this,1)">
+            ›
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+    
+</section>
+	
+	
+	
+	
+	<div id="imageModal" class="image-modal">
+
+    <div
+        class="gallery-nav gallery-prev"
+        onclick="prevImage()">
+        ‹
+    </div>
+
+    <img id="modalImage">
+
+    <div
+        class="gallery-nav gallery-next"
+        onclick="nextImage()">
+        ›
+    </div>
+
+    <span
+        class="close-image"
+        onclick="closeImage()">
+        ×
+    </span>
+
+</div>
+	
+	
+	
+	
+<script>
+	
+	const translations = {
+
+  es: {
+
+    home: "INICIO",
+    about: "NOSOTROS",
+    films: "FILMS",
+    contact: "CONTACTO",
+    send: "Enviar",
+    name: "Nombre",
+    email: "Email",
+    message: "Mensaje",
+    backFilms: "← Volver a Films",
+
+    synopsis: "Sinopsis",
+    production: "Sobre la producción",
+
+    aboutText:
+      "VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de las escenas de riesgo cinematográficas. Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias. Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.",
+
+    film1: "Benjamín (2006)",
+    film2: "Warriors (2014)",
+    film3: "No Huirás (2024)",
+    film4: "Tiempo de Justicia (En rodaje)",
+
+    film1_synopsis:
+      "Tras años atrapado en un silencio inexplicable, Benjamín vive aislado entre recuerdos fragmentados que nadie logra comprender. Mientras una verdad enterrada amenaza con salir a la luz, deberá enfrentarse a quienes le arrebataron todo.",
+
+    film1_prod:
+      "Benjamín fue nuestro primer largometraje. Realizado sin experiencia ni recursos, se convirtió en un laboratorio creativo que marcó el inicio de nuestro recorrido como realizadores.",
+
+    film2_synopsis:
+      "Pablo es un joven artista marcial que atraviesa una situación económica desesperada. Un misterioso ser espiritual lo lleva a cuestionar todo lo que cree, iniciando una batalla interior entre luz y oscuridad.",
+
+    film2_prod:
+      "Warriors nació luego de años de aprendizaje en cortometrajes y videoclips. Fue una producción más ambiciosa con actores profesionales y reconocimiento internacional en festivales de acción.",
+
+    film3_synopsis:
+      "Mery camina sola por calles oscuras intentando llegar a su casa antes de la medianoche. A medida que el tiempo avanza, el miedo crece hasta que el reloj marca las doce.",
+
+    film3_prod:
+      "Después de diez años en proyectos externos, volvimos a la producción independiente con No Huirás, nuestra primera incursión en el terror, seleccionada en festivales internacionales.",
+
+    film4_synopsis:
+      "...",
+
+    film4_prod:
+      "Tiempo de Justicia es nuestro proyecto más ambicioso hasta la fecha, actualmente en producción, con estreno previsto para 2027."
+
+  },
+
+  en: {
+
+    home: "HOME",
+    about: "ABOUT",
+    films: "FILMS",
+    contact: "CONTACT",
+    send: "Send",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    backFilms: "← Back to Films",
+
+    synopsis: "Synopsis",
+    production: "About the production",
+
+    aboutText:
+      "VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work. What began as a passion for on-camera action naturally evolved into a new stage: telling our own stories. Today we develop independent films with a strong visual identity and a focus on movement. Although we explore different genres, action remains an essential part of how we tell stories.",
+
+    film1: "Benjamín (2006)",
+    film2: "Warriors (2014)",
+    film3: "You Will Not Run Away (2024)",
+    film4: "The Justice Hour (In production)",
+
+    film1_synopsis:
+      "After years trapped in silence, Benjamín lives isolated among fragmented memories no one can understand. As a buried truth threatens to surface, he must confront those who took everything from him.",
+
+    film1_prod:
+      "Benjamín was our first feature film. Made without experience or resources, it became a creative laboratory that marked the beginning of our filmmaking journey.",
+
+    film2_synopsis:
+      "Pablo is a young martial artist struggling financially. A mysterious spiritual being forces him to question everything he believes, triggering an inner battle between light and darkness.",
+
+    film2_prod:
+      "Warriors was born after years of experience in short films and music videos. It became a more ambitious production with professional actors and international festival recognition.",
+
+    film3_synopsis:
+      "Mery walks alone through dark streets trying to reach her apartment before midnight. As time passes, fear grows until the clock strikes twelve.",
+
+    film3_prod:
+      "After ten years working on external projects, we returned to independent filmmaking with No Huirás, our first horror project selected at international festivals.",
+
+    film4_synopsis:
+      "...",
+
+    film4_prod:
+      "The Justice Hour is our most ambitious project to date, currently in production, with release planned for 2027."
+
+  
+	  
+	  
+	  
+	  
+  }
+
+};
+
+let currentLang = "es";
+
+const logo = document.getElementById("logo");
+const scenes = document.querySelectorAll(".scene");
+
+let current = 0;
+let locked = false;
+
+/* INTRO LOGO */
+window.addEventListener("load", () => {
+
+    const loader = document.getElementById("introLoader");
+
+    // seguridad: evita errores si no existe
+    if (!loader) {
+        startLogoIntro();
+        return;
+    }
+
+    // fade out loader
+    setTimeout(() => {
+        loader.classList.add("hide");
+        document.body.classList.remove("loading");
+
+        setTimeout(() => {
+            loader.remove();
+        }, 2000);
+
+        // luego arranca el logo
+        startLogoIntro();
+
+    }, 800);
+});
+	
+	function startLogoIntro() {
+    setTimeout(()=>logo.classList.add("intro"),200);
+    setTimeout(()=>logo.classList.add("center"),3000);
+}
+
+/* LOGO STATE */
+function updateLogo(){
+    if(current === 0){
+        logo.classList.add("center");
+
+        logo.classList.remove("small");
+    }else{
+        logo.classList.add("small");
+        logo.classList.remove("center");
+    }
+}
+
+/* SCENES */
+function show(i){
+    scenes.forEach(s => s.classList.remove("active"));
+    scenes[i].classList.add("active");
+
+    current = i;
+    updateLogo();
+
+    resetFilms(); // 👈 SIEMPRE limpia
+
+    if (i === 2) {
+        playFilmsWow();
+    }
+
+}
+
+	
+	
+	
+	function playFilmsWow(){
+
+    const cards = document.querySelectorAll(
+        ".scene.active .film-card"
+    );
+
+    cards.forEach((card, index) => {
+
+        // reset (por si ya entraste antes)
+        card.classList.remove("show");
+
+        setTimeout(() => {
+            card.classList.add("show");
+        }, index * 120); // delay escalonado
+    });
+}
+	
+	function resetFilms(){
+    document.querySelectorAll(".film-card")
+        .forEach(c => c.classList.remove("show"));
+}
+	
+	
+
+function goTo(i){
+
+    const blur =
+        document.getElementById("transitionBlur");
+
+    blur.classList.remove("active");
+
+    void blur.offsetWidth;
+
+    blur.classList.add("active");
+
+    setTimeout(() => {
+        show(i);
+    }, 500);
+}
+
+
+	
+	
+	
+	let currentGalleryImages = [];
+let currentImageIndex = 0;
+
+function openImage(src){
+
+    currentGalleryImages =
+        Array.from(
+            document.querySelectorAll('.gallery-thumb img')
+        ).map(img => img.src);
+
+    currentImageIndex =
+        currentGalleryImages.indexOf(src);
+
+    document.getElementById("modalImage").src = src;
+
+    document
+        .getElementById("imageModal")
+        .classList.add("active");
+}
+
+function closeImage(){
+
+    document
+        .getElementById("imageModal")
+        .classList.remove("active");
+}
+
+function nextImage(){
+
+    currentImageIndex++;
+
+    if(currentImageIndex >= currentGalleryImages.length){
+        currentImageIndex = 0;
+    }
+
+    document.getElementById("modalImage").src =
+        currentGalleryImages[currentImageIndex];
+}
+
+function prevImage(){
+
+    currentImageIndex--;
+
+    if(currentImageIndex < 0){
+        currentImageIndex =
+            currentGalleryImages.length - 1;
+    }
+
+    document.getElementById("modalImage").src =
+        currentGalleryImages[currentImageIndex];
+}
+
+document.addEventListener('keydown', function(e){
+
+    const modal =
+        document.getElementById("imageModal");
+
+    if(!modal.classList.contains('active')) return;
+
+    if(e.key === 'ArrowRight'){
+        nextImage();
+    }
+
+    if(e.key === 'ArrowLeft'){
+        prevImage();
+    }
+
+    if(e.key === 'Escape'){
+        closeImage();
+    }
+});
+	
+	
+	function slideGallery(btn,direction){
+
+    const wrapper =
+        btn.parentElement;
+
+    const slider =
+        wrapper.querySelector('.gallery-slider');
+
+    slider.scrollBy({
+        left: direction * 500,
+        behavior:'smooth'
+    });
+}
+	
+
+updateLogo();
+
+	
+	
+document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    await fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+    });
+
+    const sent = document.getElementById("sentMessage");
+if(sent){
+    sent.classList.add("active");
+
+    setTimeout(() => {
+        sent.classList.remove("active");
+        form.reset();
+    }, 2500);
+}
+	
+	    
+});
+	
+	
+	function changeLanguage(lang){
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+
+        const key = el.getAttribute("data-i18n");
+        const value = translations[lang][key];
+
+        if(value){
+            el.textContent = value;
+        }
+
+    });
+		
+		
+		document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    const value = translations[lang][key];
+    if(value !== undefined){
+        el.textContent = value;
+    }
+});
+		
+
+
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        if(translations[lang][key]){
+            el.placeholder = translations[lang][key];
+        }
+    });
+}
+	
+	window.addEventListener("load", () => {
+    changeLanguage("es");
+});
+	
+	
+
+let musicPlaying = false;
+
+function toggleMusic(){
+
+    const music = document.getElementById("bgMusic");
+    const btn = document.querySelector(".music-button");
+
+    if(!music) return;
+
+    if(!musicPlaying){
+        music.play().catch(()=>{});
+        musicPlaying = true;
+        btn.classList.add("active");
+    }else{
+        music.pause();
+        musicPlaying = false;
+        btn.classList.remove("active");
+    }
+}
+	
+	
+	
+	
+	let ytPlayers = [];
+
+function onYouTubeIframeAPIReady(){
+
+    const iframes = document.querySelectorAll('iframe.yt-player');
+
+if(!iframes.length) return;
+
+    iframes.forEach((iframe)=>{
+
+        ytPlayers.push(
+
+            new YT.Player(iframe, {
+
+                events:{
+                    onStateChange:onPlayerStateChange
+                }
+
+            })
+
+        );
+
+    });
+}
+
+function onPlayerStateChange(event){
+
+    const music =
+        document.getElementById("bgMusic");
+
+    const btn =
+        document.querySelector(".music-button");
+
+    // PLAY
+    if(event.data === YT.PlayerState.PLAYING){
+
+        music.pause();
+
+        musicPlaying = false;
+
+        btn.classList.remove("active");
+    }
+}
+	
+	
+	
+	
+	
+</script>
+
+	
+	
+	
+	
+	
+	<div id="sentMessage">
+    <div class="sent-text">
+        MESSAGE SENT
+    </div>
+</div>
+	
+	
+	
+	<audio id="bgMusic" loop>
+    <source src= "musica.ogg" type="audio/ogg">
+</audio>
+	
+	
+	<script src="https://www.youtube.com/iframe_api"></script>
+	
+	
+	
+</body>
+</html>
