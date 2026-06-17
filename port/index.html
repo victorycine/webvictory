@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fabricio Martin | Stunt Performer - Fight Choreographer - Action Director</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+	<meta name="googlebot" content="noindex, nofollow">
+	<meta name="bingbot" content="noindex, nofollow">
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0b0b0b;
+    color:#fff;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.6;
+}
+
+a{
+    color:#fff;
+    text-decoration:none;
+}
+
+section{
+    padding:35px 8%;
+}
+
+/* HERO */
+
+.hero{
+
+    min-height:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:30px;
+
+    max-width:1400px;
+    margin:auto;
+
+    padding-top:30px;
+    padding-bottom:20px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:36px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:10px;
+    white-space:nowrap;
+}
+	
+	@media(max-width:900px){
+
+.hero-text h1{
+    font-size:32px;
+    white-space:normal;
+}
+
+}
+
+.hero-text h2{
+    font-size:22px;
+    font-weight:400;
+    color:#cfcfcf;
+    margin-bottom:12px;
+    line-height:1.6;
+}
+
+.hero-text p{
+    max-width:650px;
+    color:#9d9d9d;
+    font-size:17px;
+}
+
+.hero-image{
+    flex:1;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:700px;
+    height:450px;
+    object-fit:cover;
+    border-radius:10px;
+    display:block;
+}
+
+/* TITLES */
+
+.section-title{
+    text-align:center;
+    font-size:34px;
+    letter-spacing:4px;
+    margin-bottom:15px;
+}
+
+/* REEL */
+
+.reel{
+    max-width:1200px;
+    margin:auto;
+}
+
+.reel iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    border-radius:8px;
+}
+
+/* GALLERY */
+
+.gallery-wrapper{
+    max-width:1200px;
+    margin:auto;
+    position:relative;
+}
+
+.gallery{
+    overflow:hidden;
+}
+
+.gallery img{
+    width:100%;
+    max-height:500px;
+    display:block;
+    border-radius:8px;
+    object-fit:contain;
+    margin:auto;
+}
+	.gallery{
+    height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.gallery-arrow{
+
+    position:absolute;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:60px;
+    height:60px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:42px;
+
+    background:rgba(0,0,0,.5);
+
+    cursor:pointer;
+
+    user-select:none;
+
+    transition:.3s;
+}
+
+.gallery-arrow:hover{
+    background:rgba(255,255,255,.15);
+}
+
+.gallery-prev{
+    left:-80px;
+}
+
+.gallery-next{
+    right:-80px;
+}
+
+/* SHORTS */
+
+
+
+.shorts-grid iframe{
+    width:100%;
+    aspect-ratio:9/16;
+    border:none;
+    border-radius:8px;
+}
+	.shorts-grid{
+    max-width:900px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+}
+
+/* CONTACT */
+
+.contact{
+    text-align:center;
+}
+
+.contact p{
+    color:#bdbdbd;
+    margin:12px 0;
+    font-size:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.hero{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero-text h1{
+    font-size:42px;
+}
+
+.hero-image img{
+    height:320px;
+}
+
+.gallery-prev{
+    left:10px;
+}
+
+.gallery-next{
+    right:10px;
+}
+
+.gallery-arrow{
+    background:rgba(0,0,0,.7);
+}
+
+.shorts-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>FABRICIO MARTIN</h1>
+
+<h2>
+Stunt Performer | Fight Choreographer<br>
+Action Director | Actor
+
+</h2>
+<br>
+
+<p>
+Especialista en desarrollo de escenas de acción y lucha escénica con más de 20 años de experiencia en cine, tv y comerciales.
+</p>
+
+</div>
+
+<div class="hero-image">
+<img src="hero.jpg" alt="">
+</div>
+
+</section>
+
+<!-- REEL -->
+
+<section>
+
+<h2 class="section-title">
+SHOWREEL
+</h2>
+
+<div class="reel">
+
+<iframe
+src="https://www.youtube.com/embed/fEylL01axSY"
+loading="lazy"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section>
+
+<h2 class="section-title">
+FOTOS
+</h2>
+
+<div class="gallery-wrapper">
+
+<div
+class="gallery-arrow gallery-prev"
+onclick="prevImage()">
+❮
+</div>
+
+<div class="gallery">
+
+<img
+id="galleryImage"
+alt="">
+
+	
+	
+</div>
+
+<div
+class="gallery-arrow gallery-next"
+onclick="nextImage()">
+❯
+</div>
+
+</div>
+
+</section>
+
+<!-- SHORTS -->
+
+<section>
+
+<h2 class="section-title">
+FIGHTS!
+</h2>
+
+<div class="shorts-grid">
+
+<iframe
+src="https://www.youtube.com/embed/8bIm66CB5MM"
+loading="lazy"
+allowfullscreen>
+</iframe>
+
+<iframe
+src="https://www.youtube.com/embed/gl6etNl86C4"
+		loading="lazy"
+allowfullscreen>
+</iframe>
+
+<iframe
+src="https://www.youtube.com/embed/b10Sp7WVXv0"
+		loading="lazy"
+allowfullscreen>
+</iframe>
+
+<iframe
+src="https://www.youtube.com/embed/bsARpWLRE6Q"
+		loading="lazy"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact">
+
+<h2 class="section-title">
+CONTACTO
+</h2>
+
+<p>Email: fabricio.content@gmail.com</p>
+
+<p>WhatsApp: +549 341-6608336</p>
+
+<p>
+IMDb:
+<a
+href="https://www.imdb.com/es/name/nm6240672/"
+target="_blank">
+Ver perfil
+</a>
+</p>
+
+<p>
+Instagram:
+<a
+href="https://www.instagram.com/fabriciomartin.cine/"
+target="_blank">
+@fabriciomartin.cine
+</a>
+</p>
+</section>
+
+<script>
+
+const photos = [
+
+"photo1.png",
+"photo2.png",
+"photo3.jpg",
+"photo4.jpg",
+"photo5.jpg",
+"photo6.png",
+"photo7.jpg",
+"photo8.jpeg",
+"photo9.jpeg",
+"photo10.jpg",
+"photo11.jpg",
+"photo12.png",
+"photo13.png",
+"photo14.jpg",
+"photo15.png"
+
+];
+
+let currentPhoto = 0;
+
+function nextImage(){
+
+    currentPhoto++;
+
+    if(currentPhoto >= photos.length){
+
+        currentPhoto = 0;
+
+    }
+
+    document.getElementById("galleryImage").src =
+    photos[currentPhoto];
+}
+
+function prevImage(){
+
+    currentPhoto--;
+
+    if(currentPhoto < 0){
+
+        currentPhoto =
+        photos.length - 1;
+
+    }
+
+    document.getElementById("galleryImage").src =
+    photos[currentPhoto];
+}
+
+	document.getElementById("galleryImage").src = photos[0];
+document.addEventListener("keydown", function(e){
+
+    if(e.key === "ArrowRight"){
+
+        nextImage();
+
+    }
+
+    if(e.key === "ArrowLeft"){
+
+        prevImage();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
