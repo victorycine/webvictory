@@ -1183,30 +1183,35 @@ body.loading{
 }
 
 @media (max-width:1024px){
-
+html,
+body{
+    overflow-x:hidden;
+}
     .sidebar{
         display:none;
     }
 
     .mobile-btn{
 
-        display:flex;
+    display:none;
 
-        position:fixed;
+    position:fixed;
 
-        top:20px;
-        right:20px;
+    top:20px;
+    right:20px;
 
-        width:50px;
-        height:50px;
+    width:50px;
+    height:50px;
 
-        align-items:center;
-        justify-content:center;
+    align-items:center;
+    justify-content:center;
 
-        z-index:999999;
+    z-index:999999;
 
-        cursor:pointer;
-    }
+    cursor:pointer;
+
+    background:none;
+}
 
     .mobile-btn span{
         position:absolute;
@@ -1241,32 +1246,32 @@ body.loading{
 
     .mobile-menu{
 
-        display:flex;
+    position:fixed;
 
-        position:fixed;
+    top:0;
+    right:-100%;
 
-        top:0;
-        right:-100%;
+    width:100vw;
+    height:100vh;
 
-        width:320px;
-        max-width:85vw;
+    background:rgba(0,0,0,.92);
 
-        height:100vh;
+    backdrop-filter:blur(20px);
 
-        background:rgba(0,0,0,.88);
+    display:flex;
 
-        backdrop-filter:blur(30px);
+    flex-direction:column;
 
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
+    justify-content:center;
 
-        gap:28px;
+    align-items:center;
 
-        transition:.5s cubic-bezier(.2,.8,.2,1);
+    gap:28px;
 
-        z-index:999998;
-    }
+    z-index:999998;
+
+    transition:.4s ease;
+}
 
     .mobile-menu.active{
         right:0;
