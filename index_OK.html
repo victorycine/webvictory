@@ -4,6 +4,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	
+	
+	
+	<meta name="description" content="Victory Cine es una productora cinematográfica argentina especializada en películas independientes de acción, artes marciales y cine de género.">
+
+<meta name="keywords" content="cine de artes marciales, peliculas de artes marciales, kung fu, artes marciales, mma, ufc, kickboxing, taekwondo, jackie chan, donnie yen, jet li, sammo hung, boyka, scott adkins, tony jaa, john wick, argentina, messi, karate">
+
+<meta name="author" content="Victory Cine">
+
+<meta name="robots" content="index, follow">
+
+<meta name="language" content="Spanish">
+
+<meta name="revisit-after" content="7 days">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Victory Cine">
+<meta property="og:description" content="Productora cinematográfica argentina especializada en cine de acción y artes marciales.">
+<meta property="og:image" content="https://victorycine.com/logo.png">
+<meta property="og:url" content="https://victorycine.com">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Victory Cine">
+<meta name="twitter:description" content="Productora cinematográfica argentina especializada en cine de acción y artes marciales.">
+<meta name="twitter:image" content="https://victorycine.com/logo.png">
+	
+	
+	
+	
+	
 <title>Victory Cine</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -439,12 +470,77 @@ html, body{
     width:100%;
     height:100%;
     object-fit:cover;
-    transform:scale(1.25);
+    transform:scale(1);
     transition:2.2s ease;
+	filter:brightness(.8);
+	
 }
 
+	
+	
+	
+	.scene::after{
+    z-index:1;
+}
+
+.content{
+    position:relative;
+    z-index:5;
+}
+	
+	
+	
+.scene::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.25);
+
+    pointer-events:none;
+    z-index:1;
+}
+
+.scene::after{
+    content:"";
+    position:absolute;
+    inset:0;
+	rgba(0,140,70,.20);
+
+    pointer-events:none;
+    z-index:2;
+opacity:1;
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+           rgba(80,50,140,.35) 0px,
+            rgba(80,50,140,.35) 4px,
+            transparent 4px,
+            transparent 6px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(80,50,140,.35) 0px,
+            rgba(80,50,140,.35) 4px,
+            transparent 4px,
+            transparent 6px
+        );
+
+    mix-blend-mode:soft-light;
+	 
+}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 .scene.active .video-bg{
-    transform:scale(1.03);
+    transform:scale(1.00);
 }
 
 /* overlay */
@@ -500,6 +596,9 @@ html, body{
     cursor:pointer;
     border-radius:6px;
     transition:.4s;
+
+    display:flex;
+    flex-direction:column;
 }
 
 .film-card img{
@@ -507,6 +606,7 @@ html, body{
     height:340px;
     object-fit:cover;
     transition:.6s;
+    display:block;
 }
 
 /* hover cinematic */
@@ -520,16 +620,17 @@ html, body{
 }
 
 .film-label{
-    position:absolute;
-    left:0;
-    bottom:0;
+
     width:100%;
+    height:52px;
 
-    padding:18px 14px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    background:rgba(0,0,0,.45);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    margin-top:5px;
+
+    background:#000;
 
     color:white;
 
@@ -539,7 +640,9 @@ html, body{
     letter-spacing:1px;
     text-transform:uppercase;
 
-    text-align:left;
+    text-align:center;
+
+    position:relative;
 }
 
 .section-title,
@@ -847,6 +950,12 @@ button:hover{
     color:white;
 
     cursor:pointer;
+
+    z-index:999999;
+}
+	
+	.image-modal{
+    z-index:9999999;
 }
 
 .gallery-nav{
@@ -861,6 +970,8 @@ button:hover{
     user-select:none;
 
     padding:20px;
+
+    z-index:999999;
 }
 
 .gallery-prev{
@@ -1060,7 +1171,10 @@ body.loading{
 	
 	
 
-	
+	<meta name="keywords" content="cine de artes marciales, peliculas de artes marciales, kung fu, artes marciales, mma, ufc, kickboxing, taekwondo, jackie chan, donnie yen, jet li, sammo hung, boyka, scott adkins, tony jaa, john wick, argentina, messi, karate">
+	<meta name="description" content="VICTORY Cine es una productora de cine independiente de Argentina dedicada a películas de acción, artes marciales, thriller y drama. Inspirada por el cine de acción clásico y moderno, desarrolla proyectos originales para festivales y audiencias internacionales.">
+	<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://victorycine.com">
 	
 	
 	
@@ -1252,7 +1366,7 @@ Hoy desarrollamos películas independientes con una identidad marcada por el mov
 		
 		<h3 data-i18n="production">Sobre la producción</h3>
 
-        <p data-i18n="film1_prod"></p>
+        <p data-i18n="film1_prod">
             Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer cine. Realizada sin experiencia ni recursos, pero con enorme pasión, se convirtió en un laboratorio creativo que terminó encontrando su público y marcó el inicio de nuestro recorrido como realizadores.
         </p>
 
@@ -1261,9 +1375,9 @@ Hoy desarrollamos películas independientes con una identidad marcada por el mov
 </div>
        <div class="gallery-section">
 
-    <h3 class="gallery-title">
-        Stills
-    </h3>
+    <h3 class="gallery-title" data-i18n="photos">
+    Fotos
+</h3>
 
     <div class="gallery-wrapper">
 
@@ -1275,37 +1389,70 @@ Hoy desarrollamos películas independientes con una identidad marcada por el mov
         <div class="gallery-slider">
 
             <div class="gallery-thumb">
-    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja1.png" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja2.JPG" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja3.JPG" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja4.JPG" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja5.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja6.JPG" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja7.JPG" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+    <img src="gallery/benja8.png" onclick="openImage(this.src)">
 </div>
 
+			<div class="gallery-thumb">
+    <img src="gallery/benja9.JPG" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/benja10.png" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/benja11.png" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/benja12.JPG" onclick="openImage(this.src)">
+</div>
+			
+			
+			<div class="gallery-thumb">
+    <img src="gallery/benja13.jpg" onclick="openImage(this.src)">
+</div>
+			
+			
+			<div class="gallery-thumb">
+    <img src="gallery/benja14.png" onclick="openImage(this.src)">
+</div>
+			
+			
+			
+			
+			
+			
+			
+			
         </div>
 
         <div class="gallery-arrow gallery-right"
@@ -1357,7 +1504,7 @@ Hoy desarrollamos películas independientes con una identidad marcada por el mov
 
         <h3 data-i18n="production">Sobre la producción</h3>
 
-        <p data-i18n="film2_prod"></p>
+        <p data-i18n="film2_prod">
             Warriors nació después de un largo recorrido de aprendizaje y crecimiento. La experiencia acumulada en cortometrajes, videoclips y producciones para terceros nos permitió afrontar un proyecto más ambicioso, con una visión cinematográfica más madura y una producción de mayor escala.<br>
 Este cortometraje reunió a actores profesionales junto a talentos locales, obtuvo reconocimiento en su ciudad de origen y fue seleccionada en festivales internacionales de cine de acción en Estados Unidos y la India.
         </p>
@@ -1368,9 +1515,9 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
         <div class="gallery-section">
 
-    <h3 class="gallery-title">
-        Stills
-    </h3>
+    <h3 class="gallery-title" data-i18n="photos">
+    Fotos
+</h3>
 
     <div class="gallery-wrapper">
 
@@ -1381,9 +1528,7 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
         <div class="gallery-slider">
 
-           <div class="gallery-thumb">
-    <img src= "gallery/poster.png" onclick="openImage(this.src)">
-</div>
+         
 
 <div class="gallery-thumb">
     <img src="gallery/warriors1.jpg" onclick="openImage(this.src)">
@@ -1411,6 +1556,18 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
 <div class="gallery-thumb">
     <img src="gallery/warriors7.jpg" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/warriors8.jpg" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/warriors9.jpg" onclick="openImage(this.src)">
+</div>
+			
+			<div class="gallery-thumb">
+    <img src="gallery/warriors10.jpg" onclick="openImage(this.src)">
 </div>
 
         </div>
@@ -1465,8 +1622,8 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
         <h3 data-i18n="production">Sobre la producción</h3>
 
 
-       <p data-i18n="film3_prod"></p>
-            Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás, una obra concebida como el primer paso hacia nuevos proyectos propios. Filmada en apenas dos jornadas, representó además nuestra primera incursión en el género de terror, alejándonos por primera vez de la acción y las artes marciales. La película fue seleccionada oficialmente en festivales de Inglaterra, Valencia y Argentina, donde tuvo su estreno nacional en el Festival Buenos Aires Rojo Sangre.
+       <p data-i18n="film3_prod">
+            Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás, una obra concebida como el primer paso hacia nuevos proyectos propios. Filmada en apenas dos jornadas, representó además nuestra primera incursión en el género de terror, alejándonos por primera vez de la acción y las artes marciales. El cortometraje fue seleccionado oficialmente en festivales de Inglaterra, Valencia y Argentina, donde tuvo su estreno nacional en el Festival Buenos Aires Rojo Sangre.
         </p>
 
     </div>
@@ -1475,9 +1632,9 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
         <div class="gallery-section">
 
-    <h3 class="gallery-title">
-        Stills
-    </h3>
+    <h3 class="gallery-title" data-i18n="photos">
+    Fotos
+</h3>
 
     <div class="gallery-wrapper">
 
@@ -1489,35 +1646,35 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
         <div class="gallery-slider">
 
           <div class="gallery-thumb">
-    <img src="gallery/foto1.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras1.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto2.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras2.jpeg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto3.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras3.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto4.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras4.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto5.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras5.jpeg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto6.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras6.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto7.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras7.jpg" onclick="openImage(this.src)">
 </div>
 
 <div class="gallery-thumb">
-    <img src="gallery/foto8.jpg" onclick="openImage(this.src)">
+    <img src="gallery/nohuiras8.png" onclick="openImage(this.src)">
 </div>
 
         </div>
@@ -1570,7 +1727,7 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
         <h3 data-i18n="production">Sobre la producción</h3>
 
-        <p data-i18n="film4_prod"></p>
+        <p data-i18n="film4_prod">
             Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha. Con estreno previsto para 2027, representa una nueva etapa para la productora y la consolidación de una trayectoria construida a lo largo de años de trabajo en cine y producciones audiovisuales.
         </p>
 
@@ -1580,10 +1737,9 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
 
        <div class="gallery-section">
 
-    <h3 class="gallery-title">
-        Stills
-    </h3>
-
+    <h3 class="gallery-title" data-i18n="photos">
+    Fotos
+</h3>
     <div class="gallery-wrapper">
 
         <div class="gallery-arrow gallery-left"
@@ -1686,6 +1842,7 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
     email: "Email",
     message: "Mensaje",
     backFilms: "← Volver a Films",
+	  photos: "Fotos",
 
     synopsis: "Sinopsis",
     production: "Sobre la producción",
@@ -1708,19 +1865,19 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
       "Pablo es un joven artista marcial que atraviesa una situación económica desesperada. Un misterioso ser espiritual lo lleva a cuestionar todo lo que cree, iniciando una batalla interior entre luz y oscuridad.",
 
     film2_prod:
-      "Warriors nació luego de años de aprendizaje en cortometrajes y videoclips. Fue una producción más ambiciosa con actores profesionales y reconocimiento internacional en festivales de acción.",
+      "Warriors nació luego de años de aprendizaje en cortometrajes y videoclips. Fue una producción que contó con algunos actores profesionales y logró reconocimiento internacional en festivales de cine de acción (USA, India).",
 
     film3_synopsis:
       "Mery camina sola por calles oscuras intentando llegar a su casa antes de la medianoche. A medida que el tiempo avanza, el miedo crece hasta que el reloj marca las doce.",
 
     film3_prod:
-      "Después de diez años en proyectos externos, volvimos a la producción independiente con No Huirás, nuestra primera incursión en el terror, seleccionada en festivales internacionales.",
+      "Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás, una obra concebida como el primer paso hacia nuevos proyectos propios. Filmada en apenas dos jornadas, representó además nuestra primera incursión en el género de terror, alejándonos por primera vez de la acción y las artes marciales. El cortometraje fue seleccionado oficialmente en festivales de Inglaterra, Valencia y Argentina, donde tuvo su estreno nacional en el Festival Buenos Aires Rojo Sangre.",
 
     film4_synopsis:
       "...",
 
     film4_prod:
-      "Tiempo de Justicia es nuestro proyecto más ambicioso hasta la fecha, actualmente en producción, con estreno previsto para 2027."
+      "Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha. Con estreno previsto para 2027, representa una nueva etapa para la productora y la consolidación de una trayectoria construida a lo largo de años de trabajo en cine y producciones audiovisuales."
 
   },
 
@@ -1735,7 +1892,7 @@ Este cortometraje reunió a actores profesionales junto a talentos locales, obtu
     email: "Email",
     message: "Message",
     backFilms: "← Back to Films",
-
+photos: "Photos",
     synopsis: "Synopsis",
     production: "About the production",
 
@@ -1899,9 +2056,15 @@ let currentImageIndex = 0;
 
 function openImage(src){
 
+    const clickedImg =
+        event.target;
+
+    const currentGallery =
+        clickedImg.closest('.gallery-slider');
+
     currentGalleryImages =
         Array.from(
-            document.querySelectorAll('.gallery-thumb img')
+            currentGallery.querySelectorAll('img')
         ).map(img => img.src);
 
     currentImageIndex =
@@ -2014,18 +2177,7 @@ if(sent){
 	
 	function changeLanguage(lang){
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-
-        const key = el.getAttribute("data-i18n");
-        const value = translations[lang][key];
-
-        if(value){
-            el.textContent = value;
-        }
-
-    });
-		
-		
+   	
 		document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     const value = translations[lang][key];
@@ -2052,6 +2204,60 @@ if(sent){
 	
 
 let musicPlaying = false;
+	
+	
+	window.addEventListener("load", () => {
+
+    const btn = document.querySelector(".music-button");
+
+    btn.classList.add("active");
+
+});
+	
+	let musicStarted = false;
+
+function startMusic(){
+
+    if(musicStarted) return;
+
+    const music = document.getElementById("bgMusic");
+
+    if(!music) return;
+
+    music.play()
+    .then(()=>{
+
+        musicStarted = true;
+
+        musicPlaying = true;
+
+        document
+            .querySelector(".music-button")
+            .classList.add("active");
+
+    })
+    .catch(()=>{});
+}
+
+document.addEventListener(
+    "mousemove",
+    startMusic,
+    { once:true }
+);
+
+document.addEventListener(
+    "click",
+    startMusic,
+    { once:true }
+);
+
+document.addEventListener(
+    "touchstart",
+    startMusic,
+    { once:true }
+);
+	
+	
 
 function toggleMusic(){
 
@@ -2060,14 +2266,21 @@ function toggleMusic(){
 
     if(!music) return;
 
-    if(!musicPlaying){
-        music.play().catch(()=>{});
-        musicPlaying = true;
-        btn.classList.add("active");
-    }else{
+    if(musicPlaying){
+
         music.pause();
+
         musicPlaying = false;
+
         btn.classList.remove("active");
+
+    }else{
+
+        music.play().catch(()=>{});
+
+        musicPlaying = true;
+
+        btn.classList.add("active");
     }
 }
 	
@@ -2144,7 +2357,11 @@ function onPlayerStateChange(event){
 	
 	<script src="https://www.youtube.com/iframe_api"></script>
 	
-	
+	<script>
+if(window.innerWidth <= 768){
+    window.location.href = "mobile.html";
+}
+</script>
 	
 </body>
 </html>

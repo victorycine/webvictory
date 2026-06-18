@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Victory Cine</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#000;
+    color:#fff;
+    font-family:'Inter',sans-serif;
+}
+
+/* HERO */
+
+.hero{
+    position:relative;
+    height:100vh;
+    overflow:hidden;
+}
+
+.hero video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.45);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.logo{
+    width:180px;
+    margin-bottom:30px;
+}
+
+.hero h1{
+    font-size:2.6rem;
+    font-weight:300;
+    letter-spacing:-2px;
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:1rem;
+    opacity:.8;
+}
+
+.scroll{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:2;
+    font-size:.9rem;
+    opacity:.7;
+}
+
+/* SECTIONS */
+
+section{
+    padding:70px 25px;
+}
+
+.section-title{
+    font-size:2rem;
+    font-weight:300;
+    margin-bottom:30px;
+}
+
+.section-text{
+    font-size:1rem;
+    line-height:1.9;
+    opacity:.9;
+}
+
+/* FILMS */
+
+.film{
+    margin-bottom:60px;
+}
+
+.film img{
+    width:100%;
+    display:block;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+.film h3{
+    font-size:1.6rem;
+    font-weight:400;
+    margin-bottom:10px;
+}
+
+.film span{
+    display:block;
+    margin-bottom:15px;
+    opacity:.6;
+    font-size:.9rem;
+}
+
+.film p{
+    line-height:1.8;
+    opacity:.85;
+}
+
+/* CONTACT */
+
+.contact-item{
+    margin-bottom:18px;
+    font-size:1rem;
+}
+
+.contact-item a{
+    color:white;
+    text-decoration:none;
+}
+
+form{
+    margin-top:40px;
+}
+
+input,
+textarea{
+    width:100%;
+    margin-bottom:15px;
+    padding:16px;
+
+    background:#111;
+    border:1px solid #222;
+
+    color:white;
+    font-family:inherit;
+}
+
+textarea{
+    height:140px;
+    resize:none;
+}
+
+button{
+    width:100%;
+    padding:16px;
+
+    background:white;
+    color:black;
+
+    border:none;
+
+    font-size:.85rem;
+    letter-spacing:2px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px 25px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+footer p{
+    opacity:.5;
+    font-size:.9rem;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <video autoplay muted loop playsinline>
+        <source src="videos/inicio.webm" type="video/webm">
+    </video>
+
+    <div class="hero-content">
+
+        <img src="logo.png" class="logo">
+
+        <h1>VICTORY CINE</h1>
+
+        <p>
+            Independent Films From Argentina
+        </p>
+
+    </div>
+
+    <div class="scroll">
+        Scroll ↓
+    </div>
+
+</header>
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        About
+    </h2>
+
+    <p class="section-text">
+
+        VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work.
+
+        <br><br>
+
+        What began as a passion for action in front of the camera naturally evolved into a new stage: telling our own stories.
+
+        <br><br>
+
+        Today we develop independent films with a strong visual identity and a focus on movement, emotion and cinematic storytelling.
+
+    </p>
+
+</section>
+
+<!-- FILMS -->
+
+<section id="films">
+
+    <h2 class="section-title">
+        Films
+    </h2>
+
+    <div class="film">
+
+        <img src="benjamin.png">
+
+        <h3>Benjamín</h3>
+
+        <span>Feature Film · 2006</span>
+
+        <p>
+            After years trapped in silence and fragmented memories, Benjamín must confront the people who took everything from him.
+        </p>
+
+    </div>
+
+    <div class="film">
+
+        <img src="warriors.png">
+
+        <h3>Warriors</h3>
+
+        <span>Short Film · 2014</span>
+
+        <p>
+            A young martial artist faces a spiritual journey that will challenge everything he believes.
+        </p>
+
+    </div>
+
+    <div class="film">
+
+        <img src="nohuiras.png">
+
+        <h3>No Huirás</h3>
+
+        <span>Short Horror Film · 2024</span>
+
+        <p>
+            A woman walks through dark streets trying to reach home before midnight.
+        </p>
+
+    </div>
+
+    <div class="film">
+
+        <img src="tiempodejusticia.png">
+
+        <h3>Tiempo de Justicia</h3>
+
+        <span>Feature Film · In Production</span>
+
+        <p>
+            Victory Cine's most ambitious project to date. A dramatic action film currently in production.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <h2 class="section-title">
+        Contact
+    </h2>
+
+    <div class="contact-item">
+        victoryargentina@gmail.com
+    </div>
+
+    <div class="contact-item">
+        +54 9 341 660 8336
+    </div>
+
+    <div class="contact-item">
+        <a href="https://instagram.com/victorycine">
+            Instagram
+        </a>
+    </div>
+
+    <div class="contact-item">
+        <a href="https://youtube.com/@VICTORYCine_">
+            YouTube
+        </a>
+    </div>
+
+    <form action="https://formspree.io/f/xzdqronj" method="POST">
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required>
+
+        <textarea
+            name="message"
+            placeholder="Message"
+            required></textarea>
+
+        <button type="submit">
+            SEND MESSAGE
+        </button>
+
+    </form>
+
+</section>
+
+<footer>
+
+    <p>
+        © Victory Cine
+    </p>
+
+</footer>
+
+</body>
+</html>
