@@ -12,7 +12,7 @@ body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:h
 .hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center}
 .logo{width:180px}
 
-.floating-lang{position:fixed;top:15px;right:5px;z-index:9999;color:#fff;font-size:14px;letter-spacing:2px;display:flex;gap:8px}
+.floating-lang{position:fixed;top:5px;right:5px;z-index:9999;color:#fff;font-size:14px;letter-spacing:2px;display:flex;gap:8px}
 .floating-lang button{background:transparent;color:#fff;border:none;padding:0;text-decoration:none;cursor:pointer;font-size:14px}
 .floating-lang button:hover{color:#ccc}
 
@@ -74,14 +74,15 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
     margin-bottom:10px;
 }
 
-.close-section{position:absolute;top:15px;left:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:2001}
+.close-section{position:fixed;bottom:70px;right:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:2001}
 .close-section:hover{background:rgba(255,255,255,.2)}
 	
 </style>
 </head>
 <body>
 <div class="floating-lang">
-<button onclick="changeLanguage('es')">ESP</button><span>|</span><button onclick="changeLanguage('en')">ENG</button>
+<button onclick="changeLanguage('es')">ESP</button>
+<button onclick="changeLanguage('en')">ENG</button>
 </div>
 
 <div class="floating-social">
