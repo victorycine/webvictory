@@ -16,9 +16,9 @@ body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:h
 .floating-lang button{background:transparent;color:#fff;border:none;padding:0;text-decoration:none;cursor:pointer;font-size:14px}
 .floating-lang button:hover{color:#ccc}
 
-.floating-social{position:fixed;right:15px;bottom:100px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+.floating-social{position:fixed;left:15px;top:15px;z-index:9999;display:flex;flex-direction:column;gap:10px}
 .floating-social a{display:flex;align-items:center;justify-content:center}
-.floating-social img{width:40px;height:40px;opacity:.8;transition:.3s;cursor:pointer}
+.floating-social img{width:30px;height:30px;opacity:.8;transition:.3s;cursor:pointer}
 .floating-social img:hover{opacity:1}
 
 .bottom-menu{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:rgba(0,0,0,.7);display:flex;justify-content:center;gap:30px;padding:15px;backdrop-filter:blur(5px)}
@@ -29,7 +29,8 @@ body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:h
 .content-overlay.active{display:block}
 
 section{padding:30px;padding-bottom:100px}
-img.poster{width:100%;border-radius:10px}
+section h2{text-transform:uppercase}
+img.poster{width:60%;border-radius:10px;margin:0 auto 20px}
 .film{margin-bottom:40px}
 input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box}
 
@@ -67,6 +68,7 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
 
 .film-page h2{
     margin-bottom:20px;
+    text-transform:uppercase;
 }
 
 .film-page h3{
@@ -74,7 +76,7 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
     margin-bottom:10px;
 }
 
-.close-section{position:fixed;bottom:70px;right:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:2001}
+.close-section{position:fixed;top:15px;right:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:2001;pointer-events:auto}
 .close-section:hover{background:rgba(255,255,255,.2)}
 	
 </style>
