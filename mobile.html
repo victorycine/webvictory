@@ -1,392 +1,309 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Victory Cine</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+<title>Victory Cine Mobile</title>
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#000;
-    color:#fff;
-    font-family:'Inter',sans-serif;
-}
-
-/* HERO */
-
-.hero{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-}
-
-.hero video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.45);
-}
-
-.hero-content{
-    position:relative;
-    z-index:2;
-
-    height:100%;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:30px;
-}
-
-.logo{
-    width:180px;
-    margin-bottom:30px;
-}
-
-.hero h1{
-    font-size:2.6rem;
-    font-weight:300;
-    letter-spacing:-2px;
-}
-
-.hero p{
-    margin-top:15px;
-    font-size:1rem;
-    opacity:.8;
-}
-
-.scroll{
-    position:absolute;
-    bottom:40px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:2;
-    font-size:.9rem;
-    opacity:.7;
-}
-
-/* SECTIONS */
-
-section{
-    padding:70px 25px;
-}
-
-.section-title{
-    font-size:2rem;
-    font-weight:300;
-    margin-bottom:30px;
-}
-
-.section-text{
-    font-size:1rem;
-    line-height:1.9;
-    opacity:.9;
-}
-
-/* FILMS */
-
-.film{
-    margin-bottom:60px;
-}
-
-.film img{
-    width:100%;
-    display:block;
-    border-radius:10px;
-    margin-bottom:20px;
-}
-
-.film h3{
-    font-size:1.6rem;
-    font-weight:400;
-    margin-bottom:10px;
-}
-
-.film span{
-    display:block;
-    margin-bottom:15px;
-    opacity:.6;
-    font-size:.9rem;
-}
-
-.film p{
-    line-height:1.8;
-    opacity:.85;
-}
-
-/* CONTACT */
-
-.contact-item{
-    margin-bottom:18px;
-    font-size:1rem;
-}
-
-.contact-item a{
-    color:white;
-    text-decoration:none;
-}
-
-form{
-    margin-top:40px;
-}
-
-input,
-textarea{
-    width:100%;
-    margin-bottom:15px;
-    padding:16px;
-
-    background:#111;
-    border:1px solid #222;
-
-    color:white;
-    font-family:inherit;
-}
-
-textarea{
-    height:140px;
-    resize:none;
-}
-
-button{
-    width:100%;
-    padding:16px;
-
-    background:white;
-    color:black;
-
-    border:none;
-
-    font-size:.85rem;
-    letter-spacing:2px;
+body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif}
+.hero{height:100vh;position:relative;overflow:hidden}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+.hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;justify-content:center}
+.logo{width:180px}
+.floating-lang,.floating-social{position:fixed;top:15px;z-index:9999;display:flex;gap:8px}
+.floating-lang{right:15px}.floating-social{left:15px}
+.floating-lang button,.floating-social a{background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 10px;text-decoration:none}
+section{padding:30px}
+img.poster{width:100%;border-radius:10px}
+.film{margin-bottom:40px}
+input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box}
+	
+	
+	
+	.film{
     cursor:pointer;
 }
 
-/* FOOTER */
-
-footer{
-    padding:40px 25px;
-    border-top:1px solid rgba(255,255,255,.08);
+.film-page{
+    display:none;
+    padding:30px;
 }
 
-footer p{
-    opacity:.5;
-    font-size:.9rem;
+.film-page.active{
+    display:block;
 }
 
+.back-btn{
+    display:inline-block;
+    margin-bottom:25px;
+    cursor:pointer;
+    opacity:.7;
+}
+
+.back-btn:hover{
+    opacity:1;
+}
+
+.film-trailer{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    margin-bottom:25px;
+}
+
+.film-page h2{
+    margin-bottom:20px;
+}
+
+.film-page h3{
+    margin-top:25px;
+    margin-bottom:10px;
+}
+	
+	
+	
 </style>
 </head>
-
 <body>
+<div class="floating-social">
+<a href="https://www.instagram.com/victorycine" target="_blank">IG</a>
+<a href="https://www.youtube.com/@VICTORYCine_" target="_blank">YT</a>
 
-<!-- HERO -->
+</div>
+<div class="floating-lang">
+<button onclick="changeLanguage('es')">ESP</button>
+<button onclick="changeLanguage('en')">ENG</button>
+</div>
 
 <header class="hero">
-
-    <video autoplay muted loop playsinline>
-        <source src="videos/inicio.webm" type="video/webm">
-    </video>
-
-    <div class="hero-content">
-
-        <img src="logo.png" class="logo">
-
-        <h1>VICTORY CINE</h1>
-
-        <p>
-            Independent Films From Argentina
-        </p>
-
-    </div>
-
-    <div class="scroll">
-        Scroll ↓
-    </div>
-
+<video autoplay muted loop playsinline><source src="videos/inicio.webm"></video>
+<div class="overlay"></div>
+<div class="hero-content"><img src="logo.png" class="logo"></div>
 </header>
 
-<!-- ABOUT -->
+<section><h2 id="aboutTitle">NOSOTROS</h2><p id="aboutText">VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo.
 
-<section id="about">
+Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias.
 
-    <h2 class="section-title">
-        About
-    </h2>
+Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.</p></section>
 
-    <p class="section-text">
+<section>
+<h2 id="filmsTitle">Films</h2>
+<div class="film" onclick="openFilm('film1')">
+    <img class="poster" src="benjamin.png">
+    <h3>Benjamín</h3>
+</div>
 
-        VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work.
+<div class="film" onclick="openFilm('film2')">
+    <img class="poster" src="warriors.png">
+    <h3>Warriors</h3>
+</div>
 
-        <br><br>
+<div class="film" onclick="openFilm('film3')">
+    <img class="poster" src="nohuiras.png">
+    <h3>No Huirás</h3>
+</div>
 
-        What began as a passion for action in front of the camera naturally evolved into a new stage: telling our own stories.
-
-        <br><br>
-
-        Today we develop independent films with a strong visual identity and a focus on movement, emotion and cinematic storytelling.
-
-    </p>
-
+<div class="film" onclick="openFilm('film4')">
+    <img class="poster" src="tiempodejusticia.png">
+    <h3>Tiempo de Justicia</h3>
+</div>
 </section>
 
-<!-- FILMS -->
+	
+	
+	
+	
+	<div id="film1" class="film-page">
 
-<section id="films">
+<div class="back-btn" onclick="closeFilms()">
+← Volver a Films
+</div>
 
-    <h2 class="section-title">
-        Films
-    </h2>
+<h2>Benjamín</h2>
 
-    <div class="film">
+<iframe
+class="film-trailer"
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
 
-        <img src="benjamin.png">
+<h3>Sinopsis</h3>
 
-        <h3>Benjamín</h3>
+<p>
+Tras años atrapado en un silencio inexplicable, Benjamín vive aislado entre recuerdos fragmentados que nadie logra comprender. Mientras una verdad enterrada durante años amenaza con salir a la luz, deberá enfrentarse a quienes le arrebataron todo.
+</p>
 
-        <span>Feature Film · 2006</span>
+<h3>Sobre la producción</h3>
 
-        <p>
-            After years trapped in silence and fragmented memories, Benjamín must confront the people who took everything from him.
-        </p>
+<p>
+Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer cine. Realizada sin experiencia ni recursos, pero con enorme pasión, se convirtió en un laboratorio creativo que terminó encontrando su público.
+</p>
 
-    </div>
+</div>
+	
+	
+	<div id="film2" class="film-page">
 
-    <div class="film">
+<div class="back-btn" onclick="closeFilms()">
+← Volver a Films
+</div>
 
-        <img src="warriors.png">
+<h2>Warriors</h2>
 
-        <h3>Warriors</h3>
+<iframe
+class="film-trailer"
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
 
-        <span>Short Film · 2014</span>
+<h3>Sinopsis</h3>
 
-        <p>
-            A young martial artist faces a spiritual journey that will challenge everything he believes.
-        </p>
+<p>
+Pablo es un joven artista marcial que vive junto a su abuela y atraviesa una situación económica desesperada. Cuando está a punto de tomar una decisión que podría cambiar su vida para siempre, aparece Víctor.
+</p>
 
-    </div>
+<h3>Sobre la producción</h3>
 
-    <div class="film">
+<p>
+Warriors nació después de un largo recorrido de aprendizaje y crecimiento. Fue seleccionada en festivales internacionales de cine de acción en Estados Unidos y la India.
+</p>
 
-        <img src="nohuiras.png">
+</div>
+	
+	
+	<div id="film3" class="film-page">
 
-        <h3>No Huirás</h3>
+<div class="back-btn" onclick="closeFilms()">
+← Volver a Films
+</div>
 
-        <span>Short Horror Film · 2024</span>
+<h2>No Huirás</h2>
 
-        <p>
-            A woman walks through dark streets trying to reach home before midnight.
-        </p>
+<iframe
+class="film-trailer"
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
 
-    </div>
+<h3>Sinopsis</h3>
 
-    <div class="film">
+<p>
+Mery camina sola por calles oscuras mientras intenta llegar a su departamento antes de la medianoche. A medida que el tiempo avanza, el miedo se apodera de ella.
+</p>
 
-        <img src="tiempodejusticia.png">
+<h3>Sobre la producción</h3>
 
-        <h3>Tiempo de Justicia</h3>
+<p>
+Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás.
+</p>
 
-        <span>Feature Film · In Production</span>
+</div>
+	
+	
+	
+	<div id="film4" class="film-page">
 
-        <p>
-            Victory Cine's most ambitious project to date. A dramatic action film currently in production.
-        </p>
+<div class="back-btn" onclick="closeFilms()">
+← Volver a Films
+</div>
 
-    </div>
+<h2>Tiempo de Justicia</h2>
 
+<iframe
+class="film-trailer"
+src="https://www.youtube.com/embed/VIDEO_ID"
+allowfullscreen>
+</iframe>
+
+<h3>Sinopsis</h3>
+
+<p>
+Próximamente.
+</p>
+
+<h3>Sobre la producción</h3>
+
+<p>
+Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha.
+</p>
+
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+<section>
+<h2 id="contactTitle">Contacto</h2>
+<form action="https://formspree.io/f/xzdqronj" method="POST">
+<input id="nameInput" name="name" placeholder="Nombre">
+<input id="emailInput" name="email" placeholder="Email">
+<textarea id="messageInput" name="message" placeholder="Mensaje"></textarea>
+<button id="sendButton">ENVIAR MENSAJE</button>
+</form>
 </section>
 
-<!-- CONTACT -->
+<script>
+const t={
+es:{about:"VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo. Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias. Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.",aboutTitle:"Nosotros",films:"Films",contact:"Contacto",name:"Nombre",message:"Mensaje",send:"ENVIAR MENSAJE"},
+en:{about:"VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work. What began as a passion for on-camera action naturally evolved into a new stage: telling our own stories. Today we develop independent films with a strong visual identity and a focus on movement. Although we explore different genres, action remains an essential part of how we tell stories.",aboutTitle:"About",films:"Films",contact:"Contact",name:"Name",message:"Message",send:"SEND MESSAGE"}
+};
+function changeLanguage(l){
+document.getElementById('aboutTitle').textContent=t[l].aboutTitle;
+document.getElementById('aboutText').textContent=t[l].about;
+document.getElementById('filmsTitle').textContent=t[l].films;
+document.getElementById('contactTitle').textContent=t[l].contact;
+document.getElementById('nameInput').placeholder=t[l].name;
+document.getElementById('messageInput').placeholder=t[l].message;
+document.getElementById('sendButton').textContent=t[l].send;
+}
+changeLanguage('es');
+</script>
+	
+	
+	
+	<script>
 
-<section id="contact">
+function openFilm(id){
 
-    <h2 class="section-title">
-        Contact
-    </h2>
+document.getElementById("about").style.display="none";
+document.getElementById("films").style.display="none";
+document.getElementById("contact").style.display="none";
 
-    <div class="contact-item">
-        victoryargentina@gmail.com
-    </div>
+document
+.querySelectorAll(".film-page")
+.forEach(f=>f.classList.remove("active"));
 
-    <div class="contact-item">
-        +54 9 341 660 8336
-    </div>
+document
+.getElementById(id)
+.classList.add("active");
 
-    <div class="contact-item">
-        <a href="https://instagram.com/victorycine">
-            Instagram
-        </a>
-    </div>
+window.scrollTo(0,0);
 
-    <div class="contact-item">
-        <a href="https://youtube.com/@VICTORYCine_">
-            YouTube
-        </a>
-    </div>
+}
 
-    <form action="https://formspree.io/f/xzdqronj" method="POST">
+function closeFilms(){
 
-        <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            required>
+document.getElementById("about").style.display="block";
+document.getElementById("films").style.display="block";
+document.getElementById("contact").style.display="block";
 
-        <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required>
+document
+.querySelectorAll(".film-page")
+.forEach(f=>f.classList.remove("active"));
 
-        <textarea
-            name="message"
-            placeholder="Message"
-            required></textarea>
+window.scrollTo(0,0);
 
-        <button type="submit">
-            SEND MESSAGE
-        </button>
+}
 
-    </form>
-
-</section>
-
-<footer>
-
-    <p>
-        © Victory Cine
-    </p>
-
-</footer>
-
-</body>
-</html>
+</script>
+	
+	
+	
+	
+</body></html>
