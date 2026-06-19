@@ -13,16 +13,17 @@ body{margin:0;background:#000;color:#fff;font-family:Arial,sans-serif;overflow:h
 .logo{width:180px}
 .floating-lang,.floating-social{position:fixed;top:15px;z-index:9999;display:flex;gap:8px}
 .floating-lang{right:15px}.floating-social{left:15px}
-.floating-lang button,.floating-social a{background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 10px;text-decoration:none}
+.floating-lang button,.floating-social a{background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 10px;text-decoration:none;cursor:pointer}
+.floating-social a{font-size:20px}
 
-.side-menu{position:fixed;right:15px;top:70px;z-index:9998;display:flex;flex-direction:column;gap:10px}
-.side-menu button{background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:12px 15px;text-decoration:none;cursor:pointer;transition:.3s;font-size:14px;min-width:120px}
-.side-menu button:hover{background:rgba(255,255,255,.2)}
+.bottom-menu{position:fixed;bottom:0;left:0;right:0;z-index:9998;background:rgba(0,0,0,.7);display:flex;justify-content:center;gap:30px;padding:15px;backdrop-filter:blur(5px)}
+.bottom-menu button{background:transparent;color:#fff;border:none;padding:10px;text-decoration:none;cursor:pointer;transition:.3s;font-size:14px;font-weight:bold}
+.bottom-menu button:hover{color:#ccc}
 
-.content-overlay{position:fixed;inset:0;z-index:1000;overflow-y:auto;display:none;background:rgba(0,0,0,.9)}
+.content-overlay{position:fixed;inset:0;z-index:2000;overflow-y:auto;display:none;background:rgba(0,0,0,.95)}
 .content-overlay.active{display:block}
 
-section{padding:30px}
+section{padding:30px;padding-bottom:100px}
 img.poster{width:100%;border-radius:10px}
 .film{margin-bottom:40px}
 input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box}
@@ -34,6 +35,7 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
 .film-page{
     display:none;
     padding:30px;
+    padding-bottom:100px;
 }
 
 .film-page.active{
@@ -67,23 +69,22 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
     margin-bottom:10px;
 }
 
-.close-section{position:absolute;top:15px;left:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:10001}
+.close-section{position:absolute;top:15px;left:15px;background:rgba(0,0,0,.6);color:#fff;border:1px solid #444;padding:8px 12px;cursor:pointer;z-index:2001}
 .close-section:hover{background:rgba(255,255,255,.2)}
 	
 </style>
 </head>
 <body>
 <div class="floating-social">
-<a href="https://www.instagram.com/victorycine" target="_blank">IG</a>
-<a href="https://www.youtube.com/@VICTORYCine_" target="_blank">YT</a>
-
+<a href="https://www.instagram.com/victorycine" target="_blank">📷</a>
+<a href="https://www.youtube.com/@VICTORYCine_" target="_blank">▶️</a>
 </div>
 <div class="floating-lang">
 <button onclick="changeLanguage('es')">ESP</button>
 <button onclick="changeLanguage('en')">ENG</button>
 </div>
 
-<div class="side-menu">
+<div class="bottom-menu">
 <button onclick="openSection('about')">NOSOTROS</button>
 <button onclick="openSection('films')">FILMS</button>
 <button onclick="openSection('contact')">CONTACTO</button>
