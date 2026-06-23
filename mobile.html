@@ -87,23 +87,23 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
     margin-bottom:10px;
 }
 
+/* Ajustes: centrar y reducir el botón de cerrar para que no se salga de pantalla */
 .close-section{
     position:fixed;
-    right:20%;
+    left:50%;
+    right:auto;
     transform:translateX(-50%);
-
-    bottom:50px;
+    bottom:30px;
 
     background:rgba(0,0,0,.75);
     color:#fff;
 
     border:1px solid rgba(255,255,255,.2);
 
-    padding:8px 14px;
-
+    padding:6px 10px;
     font-size:12px;
 
-    border-radius:30px;
+    border-radius:20px;
 
     cursor:pointer;
 
@@ -112,7 +112,15 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
     backdrop-filter:blur(10px);
 }
 .close-section:hover{background:rgba(255,255,255,.2)}
-	
+
+/* Ajuste responsivo adicional para pantallas muy pequeñas */
+@media (max-width:380px){
+  .close-section{
+    padding:5px 8px;
+    font-size:11px;
+    bottom:20px;
+  }
+}
 	
 	
 	.logo{
@@ -131,52 +139,58 @@ input,textarea,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box
 </div>
 
 <div class="floating-social">
-<a href="https://www.instagram.com/victorycine" target="_blank"><img src="insta.png" alt="Instagram"></a>
-<a href="https://www.youtube.com/@VICTORYCine_" target="_blank"><img src="yt.png" alt="YouTube"></a>
+<a href="https://www.instagram.com/victorycine" target="_blank" id="instaLink" title="Instagram"><img id="instaImg" src="insta.png" alt="Instagram"></a>
+<a href="https://www.youtube.com/@VICTORYCine_" target="_blank" id="ytLink" title="YouTube"><img id="ytImg" src="yt.png" alt="YouTube"></a>
 </div>
 
 <div class="bottom-menu">
-<button onclick="openSection('about')">NOSOTROS</button>
-<button onclick="openSection('films')">FILMS</button>
-<button onclick="openSection('contact')">CONTACTO</button>
+<button id="aboutBtn" onclick="openSection('about')">NOSOTROS</button>
+<button id="filmsBtn" onclick="openSection('films')">FILMS</button>
+<button id="contactBtn" onclick="openSection('contact')">CONTACTO</button>
 </div>
 
 <header class="hero">
 <video autoplay muted loop playsinline><source src="videos/inicio.webm"></video>
 <div class="overlay"></div>
-<div class="hero-content"><img src="logo.png" class="logo"></div>
+<div class="hero-content"><img src="logo.png" class="logo" id="siteLogo" alt="Victory Cine"></div>
 </header>
 
 <div class="content-overlay" id="contentOverlay">
-<button class="close-section" onclick="closeSection()">✕ Cerrar</button>
+<button class="close-section" id="closeBtn" onclick="closeSection()">✕ Cerrar</button>
 
-<section id="about" style="display:none;"><h2 id="aboutTitle">NOSOTROS</h2><p id="aboutText">VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo.
+<section id="about" style="display:none;">
+  <h2 id="aboutTitle">NOSOTROS</h2>
+  <p id="aboutText">VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo.
 
 Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias.
 
-Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.</p></section>
+Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.</p>
+</section>
 
 <section id="films" style="display:none;">
 <h2 id="filmsTitle">Films</h2>
-<div class="film" onclick="openFilm('film1')">
-    <img class="poster" src="benjamin.png">
-    <h3>Benjamín</h3>
-</div>
 
-<div class="film" onclick="openFilm('film2')">
-    <img class="poster" src="warriors.png">
-    <h3>Warriors</h3>
+<!-- Reordenado: film4, film3, film2, film1 -->
+<div class="film" onclick="openFilm('film4')">
+    <img class="poster" src="tiempodejusticia.png" alt="" id="film4Poster">
+    <h3 id="film4ListTitle">Tiempo de Justicia</h3>
 </div>
 
 <div class="film" onclick="openFilm('film3')">
-    <img class="poster" src="nohuiras.png">
-    <h3>No Huirás</h3>
+    <img class="poster" src="nohuiras.png" alt="" id="film3Poster">
+    <h3 id="film3ListTitle">No Huirás</h3>
 </div>
 
-<div class="film" onclick="openFilm('film4')">
-    <img class="poster" src="tiempodejusticia.png">
-    <h3>Tiempo de Justicia</h3>
+<div class="film" onclick="openFilm('film2')">
+    <img class="poster" src="warriors.png" alt="" id="film2Poster">
+    <h3 id="film2ListTitle">Warriors</h3>
 </div>
+
+<div class="film" onclick="openFilm('film1')">
+    <img class="poster" src="benjamin.png" alt="" id="film1Poster">
+    <h3 id="film1ListTitle">Benjamín</h3>
+</div>
+
 </section>
 
 	<div id="film1" class="film-page">
@@ -185,23 +199,23 @@ Hoy desarrollamos películas independientes con una identidad marcada por el mov
 ← Volver a Films
 </div>
 
-<h2>Benjamín</h2>
+<h2 id="film1PageTitle">Benjamín</h2>
 
 <iframe
 class="film-trailer"
 src="https://www.youtube.com/embed/VIDEO_ID"
-allowfullscreen>
+allowfullscreen title="Benjamín trailer">
 </iframe>
 
-<h3>Sinopsis</h3>
+<h3 id="film1SynopsisHeading">Sinopsis</h3>
 
-<p>
+<p id="film1SynopsisText">
 Tras años atrapado en un silencio inexplicable, Benjamín vive aislado entre recuerdos fragmentados que nadie logra comprender. Mientras una verdad enterrada durante años amenaza con salir a la luz, deberá enfrentarse a quienes le arrebataron todo.
 </p>
 
-<h3>Sobre la producción</h3>
+<h3 id="film1ProductionHeading">Sobre la producción</h3>
 
-<p>
+<p id="film1ProductionText">
 Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer cine. Realizada sin experiencia ni recursos, pero con enorme pasión, se convirtió en un laboratorio creativo que terminó encontrando su público.
 </p>
 
@@ -213,23 +227,23 @@ Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer c
 ← Volver a Films
 </div>
 
-<h2>Warriors</h2>
+<h2 id="film2PageTitle">Warriors</h2>
 
 <iframe
 class="film-trailer"
 src="https://www.youtube.com/embed/VIDEO_ID"
-allowfullscreen>
+allowfullscreen title="Warriors trailer">
 </iframe>
 
-<h3>Sinopsis</h3>
+<h3 id="film2SynopsisHeading">Sinopsis</h3>
 
-<p>
+<p id="film2SynopsisText">
 Pablo es un joven artista marcial que vive junto a su abuela y atraviesa una situación económica desesperada. Cuando está a punto de tomar una decisión que podría cambiar su vida para siempre, aparece Víctor.
 </p>
 
-<h3>Sobre la producción</h3>
+<h3 id="film2ProductionHeading">Sobre la producción</h3>
 
-<p>
+<p id="film2ProductionText">
 Warriors nació después de un largo recorrido de aprendizaje y crecimiento. Fue seleccionada en festivales internacionales de cine de acción en Estados Unidos y la India.
 </p>
 
@@ -241,23 +255,23 @@ Warriors nació después de un largo recorrido de aprendizaje y crecimiento. Fue
 ← Volver a Films
 </div>
 
-<h2>No Huirás</h2>
+<h2 id="film3PageTitle">No Huirás</h2>
 
 <iframe
 class="film-trailer"
 src="https://www.youtube.com/embed/VIDEO_ID"
-allowfullscreen>
+allowfullscreen title="No Huirás trailer">
 </iframe>
 
-<h3>Sinopsis</h3>
+<h3 id="film3SynopsisHeading">Sinopsis</h3>
 
-<p>
+<p id="film3SynopsisText">
 Mery camina sola por calles oscuras mientras intenta llegar a su departamento antes de la medianoche. A medida que el tiempo avanza, el miedo se apodera de ella.
 </p>
 
-<h3>Sobre la producción</h3>
+<h3 id="film3ProductionHeading">Sobre la producción</h3>
 
-<p>
+<p id="film3ProductionText">
 Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás.
 </p>
 
@@ -269,23 +283,23 @@ Después de diez años trabajando principalmente para proyectos de terceros, vol
 ← Volver a Films
 </div>
 
-<h2>Tiempo de Justicia</h2>
+<h2 id="film4PageTitle">Tiempo de Justicia</h2>
 
 <iframe
 class="film-trailer"
 src="https://www.youtube.com/embed/VIDEO_ID"
-allowfullscreen>
+allowfullscreen title="Tiempo de Justicia trailer">
 </iframe>
 
-<h3>Sinopsis</h3>
+<h3 id="film4SynopsisHeading">Sinopsis</h3>
 
-<p>
+<p id="film4SynopsisText">
 Próximamente.
 </p>
 
-<h3>Sobre la producción</h3>
+<h3 id="film4ProductionHeading">Sobre la producción</h3>
 
-<p>
+<p id="film4ProductionText">
 Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha.
 </p>
 
@@ -304,51 +318,203 @@ Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente e
 </div>
 
 <script>
-const t={
-es:{about:"VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo. Lo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias. Hoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.",aboutTitle:"Nosotros",films:"Films",contact:"Contacto",name:"Nombre",message:"Mensaje",send:"ENVIAR MENSAJE"},
-en:{about:"VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work. What began as a passion for on-camera action naturally evolved into a new stage: telling our own stories. Today we develop independent films with a strong visual identity and a focus on movement. Although we explore different genres, action remains an essential part of how we tell stories.",aboutTitle:"About",films:"Films",contact:"Contact",name:"Name",message:"Message",send:"SEND MESSAGE"}
+const t = {
+  es: {
+    aboutTitle: "Nosotros",
+    about: "VICTORY Cine nace en 2005, después de algunos años de experiencia en el mundo de los dobles de riesgo.\n\nLo que comenzó como una pasión por la acción frente a cámara evolucionó naturalmente hacia una nueva etapa: contar nuestras propias historias.\n\nHoy desarrollamos películas independientes con una identidad marcada por el movimiento y un lenguaje visual intenso. Aunque exploramos distintos géneros, la acción sigue siendo parte esencial de nuestra forma de contar historias.",
+    films: "Films",
+    contact: "Contacto",
+    name: "Nombre",
+    email: "Correo electrónico",
+    message: "Mensaje",
+    send: "ENVIAR MENSAJE",
+    close: "✕ Cerrar",
+    backBtn: "← Volver a Films",
+    // Film list titles
+    film1ListTitle: "Benjamín",
+    film2ListTitle: "Warriors",
+    film3ListTitle: "No Huirás",
+    film4ListTitle: "Tiempo de Justicia",
+    // Film page titles
+    film1PageTitle: "Benjamín",
+    film2PageTitle: "Warriors",
+    film3PageTitle: "No Huirás",
+    film4PageTitle: "Tiempo de Justicia",
+    // Headings
+    synopsisHeading: "Sinopsis",
+    productionHeading: "Sobre la producción",
+    // Film 1 texts
+    film1SynopsisText: "Tras años atrapado en un silencio inexplicable, Benjamín vive aislado entre recuerdos fragmentados que nadie logra comprender. Mientras una verdad enterrada durante años amenaza con salir a la luz, deberá enfrentarse a quienes le arrebataron todo.",
+    film1ProductionText: "Benjamín fue nuestro primer largometraje y el proyecto que nos animó a hacer cine. Realizada sin experiencia ni recursos, pero con enorme pasión, se convirtió en un laboratorio creativo que terminó encontrando su público.",
+    // Film 2 texts
+    film2SynopsisText: "Pablo es un joven artista marcial que vive junto a su abuela y atraviesa una situación económica desesperada. Cuando está a punto de tomar una decisión que podría cambiar su vida para siempre, aparece Víctor.",
+    film2ProductionText: "Warriors nació después de un largo recorrido de aprendizaje y crecimiento. Fue seleccionada en festivales internacionales de cine de acción en Estados Unidos y la India.",
+    // Film 3 texts
+    film3SynopsisText: "Mery camina sola por calles oscuras mientras intenta llegar a su departamento antes de la medianoche. A medida que el tiempo avanza, el miedo se apodera de ella.",
+    film3ProductionText: "Después de diez años trabajando principalmente para proyectos de terceros, volvimos a la producción independiente con No Huirás.",
+
+    // Film 4 texts
+    film4SynopsisText: "Próximamente.",
+    film4ProductionText: "Tiempo de Justicia es un largometraje que combina drama y acción. Actualmente en producción, es el proyecto más ambicioso desarrollado por Victory Cine hasta la fecha.",
+    // Social alt / titles
+    instaAlt: "Instagram",
+    ytAlt: "YouTube",
+    // Bottom menu
+    aboutBtn: "NOSOTROS",
+    filmsBtn: "FILMS",
+    contactBtn: "CONTACTO"
+  },
+  en: {
+    aboutTitle: "About",
+    about: "VICTORY Cine was founded in 2005 after several years of experience in cinematic stunt work.\n\nWhat began as a passion for on-camera action naturally evolved into a new stage: telling our own stories.\n\nToday we develop independent films with a strong visual identity and a focus on movement. Although we explore different genres, action remains an essential part of how we tell stories.",
+    films: "Films",
+    contact: "Contact",
+    name: "Name",
+    email: "Email",
+    message: "Message",
+    send: "SEND MESSAGE",
+    close: "✕ Close",
+    backBtn: "← Back to Films",
+    // Film list titles (use translated or original as preferred)
+    film1ListTitle: "Benjamin",
+    film2ListTitle: "Warriors",
+    film3ListTitle: "You Won't Run",
+    film4ListTitle: "Time for Justice",
+    // Film page titles
+    film1PageTitle: "Benjamin",
+    film2PageTitle: "Warriors",
+    film3PageTitle: "You Won't Run",
+    film4PageTitle: "Time for Justice",
+    // Headings
+    synopsisHeading: "Synopsis",
+    productionHeading: "About the production",
+    // Film 1 texts
+    film1SynopsisText: "After years trapped in an inexplicable silence, Benjamin lives isolated among fragmented memories no one can understand. As a truth buried for years threatens to come to light, he must confront those who took everything from him.",
+    film1ProductionText: "Benjamin was our first feature and the project that encouraged us to make films. Made without experience or resources but with enormous passion, it became a creative laboratory that eventually found its audience.",
+    // Film 2 texts
+    film2SynopsisText: "Pablo is a young martial artist who lives with his grandmother and faces desperate financial circumstances. When he's about to make a choice that could change his life forever, Victor appears.",
+    film2ProductionText: "Warriors was born after a long journey of learning and growth. It was selected at international action film festivals in the United States and India.",
+    // Film 3 texts
+    film3SynopsisText: "Mery walks alone through dark streets trying to reach her apartment before midnight. As time passes, fear takes hold of her.",
+    film3ProductionText: "After ten years working mostly on third-party projects, we returned to independent production with You Won't Run.",
+    // Film 4 texts
+    film4SynopsisText: "Coming soon.",
+    film4ProductionText: "Time for Justice is a feature that combines drama and action. Currently in production, it is the most ambitious project developed by Victory Cine to date.",
+    // Social alt / titles
+    instaAlt: "Instagram",
+    ytAlt: "YouTube",
+    // Bottom menu
+    aboutBtn: "ABOUT",
+    filmsBtn: "FILMS",
+    contactBtn: "CONTACT"
+  }
 };
+
 function changeLanguage(l){
-document.getElementById('aboutTitle').textContent=t[l].aboutTitle;
-document.getElementById('aboutText').textContent=t[l].about;
-document.getElementById('filmsTitle').textContent=t[l].films;
-document.getElementById('contactTitle').textContent=t[l].contact;
-document.getElementById('nameInput').placeholder=t[l].name;
-document.getElementById('messageInput').placeholder=t[l].message;
-document.getElementById('sendButton').textContent=t[l].send;
+  // General sections
+  document.getElementById('aboutTitle').textContent = t[l].aboutTitle;
+  document.getElementById('aboutText').textContent = t[l].about;
+  document.getElementById('filmsTitle').textContent = t[l].films;
+  document.getElementById('contactTitle').textContent = t[l].contact;
+
+  // Bottom menu buttons
+  document.getElementById('aboutBtn').textContent = t[l].aboutBtn;
+  document.getElementById('filmsBtn').textContent = t[l].filmsBtn;
+  document.getElementById('contactBtn').textContent = t[l].contactBtn;
+
+  // Contact form placeholders and button
+  document.getElementById('nameInput').placeholder = t[l].name;
+  document.getElementById('emailInput').placeholder = t[l].email;
+  document.getElementById('messageInput').placeholder = t[l].message;
+  document.getElementById('sendButton').textContent = t[l].send;
+
+  // Close overlay button
+  document.getElementById('closeBtn').textContent = t[l].close;
+
+  // Back to films buttons (there are multiple elements with class back-btn)
+  document.querySelectorAll('.back-btn').forEach(function(el){
+    el.textContent = t[l].backBtn;
+  });
+
+  // Film list titles
+  document.getElementById('film1ListTitle').textContent = t[l].film1ListTitle;
+  document.getElementById('film2ListTitle').textContent = t[l].film2ListTitle;
+  document.getElementById('film3ListTitle').textContent = t[l].film3ListTitle;
+  document.getElementById('film4ListTitle').textContent = t[l].film4ListTitle;
+
+  // Film page titles
+  document.getElementById('film1PageTitle').textContent = t[l].film1PageTitle;
+  document.getElementById('film2PageTitle').textContent = t[l].film2PageTitle;
+  document.getElementById('film3PageTitle').textContent = t[l].film3PageTitle;
+  document.getElementById('film4PageTitle').textContent = t[l].film4PageTitle;
+
+  // Headings (synopsis & production) — same for all films
+  document.getElementById('film1SynopsisHeading').textContent = t[l].synopsisHeading;
+  document.getElementById('film2SynopsisHeading').textContent = t[l].synopsisHeading;
+  document.getElementById('film3SynopsisHeading').textContent = t[l].synopsisHeading;
+  document.getElementById('film4SynopsisHeading').textContent = t[l].synopsisHeading;
+
+  document.getElementById('film1ProductionHeading').textContent = t[l].productionHeading;
+  document.getElementById('film2ProductionHeading').textContent = t[l].productionHeading;
+  document.getElementById('film3ProductionHeading').textContent = t[l].productionHeading;
+  document.getElementById('film4ProductionHeading').textContent = t[l].productionHeading;
+
+  // Film texts
+  document.getElementById('film1SynopsisText').textContent = t[l].film1SynopsisText;
+  document.getElementById('film1ProductionText').textContent = t[l].film1ProductionText;
+
+  document.getElementById('film2SynopsisText').textContent = t[l].film2SynopsisText;
+  document.getElementById('film2ProductionText').textContent = t[l].film2ProductionText;
+
+  document.getElementById('film3SynopsisText').textContent = t[l].film3SynopsisText;
+  document.getElementById('film3ProductionText').textContent = t[l].film3ProductionText;
+
+  document.getElementById('film4SynopsisText').textContent = t[l].film4SynopsisText;
+  document.getElementById('film4ProductionText').textContent = t[l].film4ProductionText;
+
+  // Social alt and titles
+  document.getElementById('instaImg').alt = t[l].instaAlt;
+  document.getElementById('ytImg').alt = t[l].ytAlt;
+  document.getElementById('instaLink').title = t[l].instaAlt;
+  document.getElementById('ytLink').title = t[l].ytAlt;
+
+  // Update html lang attribute for accessibility / SEO
+  document.documentElement.lang = (l === 'es') ? 'es' : 'en';
 }
+
+// Default language
 changeLanguage('es');
 
 function openSection(sectionId){
-document.getElementById('contentOverlay').classList.add('active');
-document.getElementById('about').style.display='none';
-document.getElementById('films').style.display='none';
-document.getElementById('contact').style.display='none';
-document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
-document.getElementById(sectionId).style.display='block';
+  document.getElementById('contentOverlay').classList.add('active');
+  document.getElementById('about').style.display='none';
+  document.getElementById('films').style.display='none';
+  document.getElementById('contact').style.display='none';
+  document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
+  document.getElementById(sectionId).style.display='block';
 }
 
 function closeSection(){
-document.getElementById('contentOverlay').classList.remove('active');
-document.getElementById('about').style.display='none';
-document.getElementById('films').style.display='none';
-document.getElementById('contact').style.display='none';
-document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
+  document.getElementById('contentOverlay').classList.remove('active');
+  document.getElementById('about').style.display='none';
+  document.getElementById('films').style.display='none';
+  document.getElementById('contact').style.display='none';
+  document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
 }
 
 function openFilm(id){
-document.getElementById('about').style.display='none';
-document.getElementById('films').style.display='none';
-document.getElementById('contact').style.display='none';
-document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
-document.getElementById(id).style.display='block';
+  document.getElementById('about').style.display='none';
+  document.getElementById('films').style.display='none';
+  document.getElementById('contact').style.display='none';
+  document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
+  document.getElementById(id).style.display='block';
 }
 
 function closeFilm(){
-document.getElementById('about').style.display='none';
-document.getElementById('films').style.display='block';
-document.getElementById('contact').style.display='none';
-document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
+  document.getElementById('about').style.display='none';
+  document.getElementById('films').style.display='block';
+  document.getElementById('contact').style.display='none';
+  document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
 }
 </script>
 	
