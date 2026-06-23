@@ -359,11 +359,11 @@ const t = {
     film1ListTitle: "Benjamin",
     film2ListTitle: "Warriors",
     film3ListTitle: "You Won't Run",
-    film4ListTitle: "Time for Justice",
+    film4ListTitle: "The Justice Hour",
     film1PageTitle: "Benjamin",
     film2PageTitle: "Warriors",
     film3PageTitle: "You Won't Run",
-    film4PageTitle: "Time for Justice",
+    film4PageTitle: "The Justice Hour",
     synopsisHeading: "Synopsis",
     productionHeading: "About the production",
     film1SynopsisText: "After years trapped in an inexplicable silence, Benjamin lives isolated among fragmented memories no one can understand. As a truth buried for years threatens to come to light, he must confront those who took everything from him.",
@@ -373,7 +373,7 @@ const t = {
     film3SynopsisText: "Mery walks alone through dark streets trying to reach her apartment before midnight. As time passes, fear takes hold of her.",
     film3ProductionText: "After ten years working mostly on third-party projects, we returned to independent production with You Won't Run.",
     film4SynopsisText: "Coming soon.",
-    film4ProductionText: "Time for Justice is a feature that combines drama and action. Currently in production, it is the most ambitious project developed by Victory Cine to date.",
+    film4ProductionText: "The Justice Hour is a feature that combines drama and action. Currently in production, it is the most ambitious project developed by Victory Cine to date.",
     instaAlt: "Instagram",
     ytAlt: "YouTube",
     aboutBtn: "ABOUT",
@@ -381,6 +381,35 @@ const t = {
     contactBtn: "CONTACT"
   }
 };
+
+// Store original iframe src in data-src so we can restore after stopping
+document.querySelectorAll('.film-trailer').forEach(function(iframe){
+  if(!iframe.getAttribute('data-src')){
+    iframe.setAttribute('data-src', iframe.getAttribute('src') || '');
+  }
+});
+
+// Stop all trailers by clearing their src (preserves original in data-src)
+function stopAllVideos(){
+  document.querySelectorAll('.film-trailer').forEach(function(iframe){
+    try {
+      // only clear if there is a src now
+      if(iframe.getAttribute('src')){
+        iframe.setAttribute('src', '');
+      }
+    } catch(e){}
+  });
+}
+
+// Restore the iframe src(s) inside a given container (e.g., a film page)
+function restoreVideosIn(container){
+  container.querySelectorAll('.film-trailer').forEach(function(iframe){
+    const orig = iframe.getAttribute('data-src');
+    if(orig && !iframe.getAttribute('src')){
+      iframe.setAttribute('src', orig);
+    }
+  });
+}
 
 function changeLanguage(l){
   // General sections
@@ -458,6 +487,9 @@ function changeLanguage(l){
 changeLanguage('es');
 
 function openSection(sectionId){
+  // stop any playing trailer before switching
+  stopAllVideos();
+
   document.getElementById('contentOverlay').classList.add('active');
   document.getElementById('about').style.display='none';
   document.getElementById('films').style.display='none';
@@ -467,6 +499,9 @@ function openSection(sectionId){
 }
 
 function closeSection(){
+  // stop any playing trailer when closing overlay
+  stopAllVideos();
+
   document.getElementById('contentOverlay').classList.remove('active');
   document.getElementById('about').style.display='none';
   document.getElementById('films').style.display='none';
@@ -475,14 +510,24 @@ function closeSection(){
 }
 
 function openFilm(id){
+  // stop other videos first
+  stopAllVideos();
+
   document.getElementById('about').style.display='none';
   document.getElementById('films').style.display='none';
   document.getElementById('contact').style.display='none';
   document.querySelectorAll('.film-page').forEach(f=>f.style.display='none');
-  document.getElementById(id).style.display='block';
+  const page = document.getElementById(id);
+  page.style.display='block';
+
+  // restore the iframe src for this film so the video is visible / playable
+  restoreVideosIn(page);
 }
 
 function closeFilm(){
+  // stop videos for the film page
+  stopAllVideos();
+
   document.getElementById('about').style.display='none';
   document.getElementById('films').style.display='block';
   document.getElementById('contact').style.display='none';
