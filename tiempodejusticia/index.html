@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Película | Victory Cine</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:#1a1a1a #000;scrollbar-width:thin}
+html::-webkit-scrollbar{width:10px}
+html::-webkit-scrollbar-track{background:#000}
+html::-webkit-scrollbar-thumb{background:#1a1a1a;border-radius:5px}
+html::-webkit-scrollbar-thumb:hover{background:#333}
+body{background:#000;color:#fff;font-family:Inter,sans-serif;overflow-x:hidden;padding-top:35px}
+header{position:fixed;top:0;width:100%;height:35px;padding:0;display:flex;justify-content:center;align-items:center;z-index:100;transition:.4s}
+header.scrolled{background:rgba(0,0,0,.6);backdrop-filter:blur(10px)}
+nav{display:flex;gap:40px}
+nav a{color:#fff;text-decoration:none;letter-spacing:3px;text-transform:uppercase;font-size:13px;font-family:Inter,sans-serif;font-weight:500}
+
+/* Video fijo de fondo */
+.fixed-video-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;object-fit:cover}
+.overlay-fixed{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.58);z-index:-1;pointer-events:none}
+
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:140px 8%;margin-top:-35px;padding-top:175px;padding-bottom:35px;z-index:1}
+.hero-content{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
+.hero-content img{max-width:420px;width:80%;margin-bottom:30px;margin-top:-12em}
+.btn-container{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:20px}
+.btn{border:1px solid #fff;padding:16px 40px;color:#fff;text-decoration:none;letter-spacing:4px;cursor:pointer;background:transparent;font-family:Inter,sans-serif;font-size:13px;transition:.3s;text-transform:uppercase;font-weight:500}
+.btn:hover{background:#fff;color:#000}
+.btn-disclaimer{font-size:12px;color:#999;line-height:1.6;font-weight:300;max-width:400px;letter-spacing:1px}
+.production{font-family:Inter,sans-serif;font-size:14px;position:relative;z-index:3;letter-spacing:2px;text-transform:uppercase;font-weight:400}
+
+section{padding:140px 8%;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;z-index:1}
+.container{max-width:1200px;margin:auto;width:100%;position:relative;z-index:3}
+h2{font-family:Inter,sans-serif;font-size:48px;text-align:center;margin-bottom:50px;letter-spacing:4px;text-transform:uppercase;font-weight:500}
+p{color:#cfcfcf;font-size:18px;line-height:1.9;text-align:center;font-family:Inter,sans-serif;font-weight:300}
+.dark{background:#050505}
+blockquote{margin-top:70px;text-align:center;font-family:Inter,sans-serif;font-size:24px;font-style:italic;letter-spacing:2px;font-weight:300}
+#proyecto{padding:80px 8%;align-items:center;justify-content:center}
+#fotogramas{position:relative;width:100vw;height:100vh;padding:0;margin:0;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;display:flex;flex-direction:column;overflow:hidden;background:#000;z-index:2;padding-top:35px;margin-top:-35px}
+.gallery-main{display:flex;width:100%;flex:1;align-items:center;justify-content:center;overflow:hidden}
+.gallery-main img{width:100%;height:100%;object-fit:contain;transition:all .6s cubic-bezier(.4,0,.2,1)}
+.gallery-bottom{display:flex;width:100%;height:12%;gap:0;overflow-x:auto;overflow-y:hidden;background:#050505}
+.gallery-thumb{position:relative;cursor:pointer;transition:all .6s cubic-bezier(.4,0,.2,1);overflow:hidden;border:1px solid #1a1a1a;flex:1;min-width:0;height:100%}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.gallery-thumb:hover img{transform:scale(1.1)}
+.gallery-thumb.active{border:2px solid #fff;box-shadow:inset 0 0 0 2px #fff}
+#lightbox{display:none;position:fixed;inset:0;background:#000;z-index:999;justify-content:center;align-items:center}
+#lightbox img{max-width:95%;max-height:95%}
+#close{position:absolute;top:25px;right:35px;font-size:40px;cursor:pointer}
+#modal-teaser{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:998;justify-content:center;align-items:center;padding:20px}
+#modal-teaser.active{display:flex}
+.modal-content{position:relative;width:100%;max-width:1000px;aspect-ratio:16/9}
+.modal-close{position:absolute;top:-40px;right:0;font-size:40px;cursor:pointer;color:#fff;z-index:999}
+#teaser-player{width:100%;height:100%;background:#000}
+footer{text-align:center;padding:60px;color:#888;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:400;background:#000;position:relative;z-index:1}
+@media(max-width:768px){
+nav{display:none}
+h2{font-size:36px}
+p{font-size:16px}
+.hero{padding:100px 8%}
+.modal-close{top:15px;right:15px}
+.btn-disclaimer{font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- Video de fondo fijo -->
+<video class="fixed-video-bg" autoplay muted loop playsinline>
+  <source src="videofondo.mp4" type="video/mp4">
+</video>
+<div class="overlay-fixed"></div>
+
+<header id="header"><nav>
+<a href="#inicio">Inicio</a><a href="#sinopsis">Sinopsis</a><a href="#proyecto">El Proyecto</a><a href="#fotogramas">Fotogramas</a>
+</nav></header>
+
+<section class="hero" id="inicio">
+<div class="hero-content">
+<img src="titulo.png" alt="Logo">
+<div class="btn-container">
+<button class="btn" id="teaser-btn">VER WORK IN PROGRESS</button>
+<p class="btn-disclaimer">Material en desarrollo. La película se encuentra en etapa de postproducción y aún no cuenta con su versión final. Color, sonido, mezcla y efectos visuales serán completados en la etapa final.</p>
+</div>
+</div>
+<div class="production">Una producción de Victory Cine</div>
+</section>
+
+<section id="sinopsis">
+<div class="container">
+<h2>SINOPSIS</h2>
+<p>Años después del asesinato de su esposa, Víctor, un expolicía<br>consumido por la culpa y el deseo de justicia, recibe una nueva pista<br>sobre el responsable del crimen. Decidido a terminar con la búsqueda<br>que marcó su vida, se adentra en una peligrosa organización criminal<br>donde descubre a Camila, una joven secuestrada por la banda. A partir<br>de ese momento, lo que comenzó como una misión de venganza se<br>transforma en una desesperada carrera por rescatarla, mientras enfrenta<br>un entramado de violencia, corrupción y secretos que pondrán a<br>prueba todo aquello en lo que alguna vez creyó.</p>
+</div>
+</section>
+
+<section id="proyecto">
+<div class="container">
+<h2>EL PROYECTO</h2>
+<p>Tiempo de Justicia es un largometraje independiente de acción con una fuerte carga dramática,<br>producido por Victory Cine. La historia transcurre en la ciudad de Rosario, que se convierte en el<br>escenario principal de una propuesta poco frecuente dentro del cine argentino: un thriller de acción<br>que combina secuencias de alto impacto con personajes atravesados por el dolor, la pérdida y la<br>búsqueda de justicia.<br><br>Con más del 90% del rodaje realizado, el proyecto avanza hacia su etapa final de producción. El<br>plan contempla su participación en festivales internacionales, una estrategia de difusión mediante<br>campañas publicitarias pagas en redes sociales y su estreno en salas de cine. Las producciones<br>anteriores de Victory Cine han sido seleccionadas en festivales de Estados Unidos, España, Reino<br>Unido e India, y también han contado con estrenos presenciales dentro del circuito de festivales<br>en Argentina.<br><br>En esta etapa, el proyecto busca establecer alianzas con productores, empresas y marcas que<br>deseen asociarse a una película con potencial de alcance nacional e internacional. Además de su<br>participación como patrocinadores, los socios contarán con acciones de comunicación y contenido<br>especialmente desarrolladas para potenciar la visibilidad de su marca durante el lanzamiento<br>del proyecto.</p>
+</div>
+</section>
+
+<section id="fotogramas">
+<div class="gallery-main">
+<img id="main-img" src="img/01.jpg" alt="Foto principal">
+</div>
+<div class="gallery-bottom" id="thumbnails-bottom">
+<div class="gallery-thumb active" data-src="img/01.jpg"><img src="img/01.jpg" alt="Thumb 1"></div>
+<div class="gallery-thumb" data-src="img/02.jpg"><img src="img/02.jpg" alt="Thumb 2"></div>
+<div class="gallery-thumb" data-src="img/03.jpg"><img src="img/03.jpg" alt="Thumb 3"></div>
+<div class="gallery-thumb" data-src="img/04.jpg"><img src="img/04.jpg" alt="Thumb 4"></div>
+<div class="gallery-thumb" data-src="img/05.jpg"><img src="img/05.jpg" alt="Thumb 5"></div>
+<div class="gallery-thumb" data-src="img/06.jpg"><img src="img/06.jpg" alt="Thumb 6"></div>
+<div class="gallery-thumb" data-src="img/07.jpg"><img src="img/07.jpg" alt="Thumb 7"></div>
+<div class="gallery-thumb" data-src="img/08.jpg"><img src="img/08.jpg" alt="Thumb 8"></div>
+<div class="gallery-thumb" data-src="img/09.jpg"><img src="img/09.jpg" alt="Thumb 9"></div>
+<div class="gallery-thumb" data-src="img/10.jpg"><img src="img/10.jpg" alt="Thumb 10"></div>
+</div>
+</section>
+
+<footer>© 2026 Victory Cine</footer>
+
+<div id="modal-teaser">
+<div class="modal-content">
+<span class="modal-close" id="modal-close">✕</span>
+<video id="teaser-player" controls></video>
+</div>
+</div>
+
+<div id="lightbox"><span id="close">✕</span><img id="lbimg"></div>
+
+<!-- HLS.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+const h=document.getElementById('header');
+addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>60));
+
+// Modal Teaser con HLS.js
+const modalTeaser=document.getElementById('modal-teaser');
+const teaserBtn=document.getElementById('teaser-btn');
+const modalClose=document.getElementById('modal-close');
+const teaserPlayer=document.getElementById('teaser-player');
+
+teaserBtn.onclick=()=>{
+  modalTeaser.classList.add('active');
+  initializeHLS();
+};
+
+modalClose.onclick=()=>{
+  modalTeaser.classList.remove('active');
+  teaserPlayer.pause();
+};
+
+modalTeaser.onclick=e=>{
+  if(e.target===modalTeaser){
+    modalTeaser.classList.remove('active');
+    teaserPlayer.pause();
+  }
+}
+
+// Inicializar HLS.js
+function initializeHLS(){
+  const videoSrc='hls/video.m3u8';
+  
+  if(Hls.isSupported()){
+    const hls=new Hls();
+    hls.loadSource(videoSrc);
+    hls.attachMedia(teaserPlayer);
+    hls.on(Hls.Events.MANIFEST_PARSED,function(){
+      console.log('HLS manifest cargado correctamente');
+      teaserPlayer.play();
+    });
+    hls.on(Hls.Events.ERROR,function(event,data){
+      console.error('Error en HLS:',data);
+    });
+  } else if(teaserPlayer.canPlayType('application/vnd.apple.mpegurl')){
+    // Safari nativo
+    teaserPlayer.src=videoSrc;
+    teaserPlayer.play();
+  }
+}
+
+// Galería
+const mainImg=document.getElementById('main-img');
+const allThumbs=document.querySelectorAll('.gallery-thumb');
+
+allThumbs.forEach(thumb=>{
+  thumb.addEventListener('click',()=>{
+    const newSrc=thumb.dataset.src;
+    
+    // Cambiar imagen principal con fade
+    mainImg.style.opacity='0';
+    
+    setTimeout(()=>{
+      mainImg.src=newSrc;
+      mainImg.style.opacity='1';
+    },300);
+    
+    // Actualizar clase active
+    document.querySelectorAll('.gallery-thumb').forEach(t=>t.classList.remove('active'));
+    thumb.classList.add('active');
+  });
+});
+
+// Lightbox (doble click)
+const lb=document.getElementById('lightbox'),img=document.getElementById('lbimg');
+mainImg.ondblclick=()=>{img.src=mainImg.src;lb.style.display='flex';};
+document.querySelectorAll('.gallery-thumb img').forEach(i=>i.ondblclick=()=>{img.src=i.src;lb.style.display='flex';});
+document.getElementById('close').onclick=()=>lb.style.display='none';
+lb.onclick=e=>{if(e.target===lb)lb.style.display='none';}
+</script>
+</body></html>
