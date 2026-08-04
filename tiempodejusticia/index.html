@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Película | Victory Cine</title>
+<title>TIEMPO DE JUSTICIA | Film | Victory Cine</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -41,7 +42,7 @@ nav a{color:#fff;text-decoration:none;letter-spacing:3px;text-transform:uppercas
 .hero{height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:140px 8%;margin-top:-35px;padding-top:175px;padding-bottom:35px;z-index:1}
 .hero-content{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
 .hero-content img{max-width:420px;width:80%;margin-bottom:30px;margin-top:-12em}
-.btn-container{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:20px}
+.btn-container{display:flex;flex-direction:column;align-items:center;gap:32px;margin-top:20px}
 .btn{border:1px solid #fff;padding:16px 40px;color:#fff;text-decoration:none;letter-spacing:4px;cursor:pointer;background:transparent;font-family:Inter,sans-serif;font-size:13px;transition:.3s;text-transform:uppercase;font-weight:500}
 .btn:hover{background:#fff;color:#000}
 .btn-disclaimer{font-size:12px;color:#999;line-height:1.6;font-weight:300;max-width:400px;letter-spacing:1px}
@@ -79,9 +80,84 @@ p{font-size:16px}
 .modal-close{top:15px;right:15px}
 .btn-disclaimer{font-size:11px}
 }
+
+/* ============================
+   LOADER CINEMATOGRÁFICO
+   ============================ */
+#loader{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:5000;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .7s ease;
+}
+#loader.loader-fade-out{
+    opacity:0;
+    pointer-events:none;
+}
+.loader-bar-track{
+    width:220px;
+    height:1px;
+    background:rgba(255,255,255,.15);
+    overflow:hidden;
+    position:relative;
+}
+.loader-bar-fill{
+    height:100%;
+    width:0%;
+    background:#fff;
+}
+.loader-percent{
+    margin-top:18px;
+    font-family:Inter,sans-serif;
+    font-size:12px;
+    letter-spacing:4px;
+    font-weight:300;
+    color:#fff;
+}
+body.loader-active{overflow:hidden}
+
+/* ============================
+   FLECHA DE SCROLL (MÓVIL)
+   ============================ */
+#scroll-arrow{
+    display:none;
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:Inter,sans-serif;
+    font-size:26px;
+    color:#fff;
+    z-index:50;
+    line-height:1;
+    animation:scrollArrowFloat 1.8s ease-in-out infinite;
+    transition:opacity .5s ease;
+    pointer-events:none;
+}
+#scroll-arrow.scroll-arrow-hidden{
+    opacity:0;
+}
+@keyframes scrollArrowFloat{
+    0%,100%{transform:translate(-50%,0)}
+    50%{transform:translate(-50%,10px)}
+}
+@media(max-width:768px){
+#scroll-arrow{display:block}
+}
 </style>
 </head>
-<body>
+<body class="loader-active">
+
+<!-- Loader cinematográfico -->
+<div id="loader">
+<div class="loader-bar-track"><div class="loader-bar-fill" id="loader-bar-fill"></div></div>
+<div class="loader-percent" id="loader-percent">0%</div>
+</div>
 
 <!-- Video de fondo fijo -->
 <video
@@ -106,7 +182,7 @@ p{font-size:16px}
 <div class="overlay-fixed"></div>
 
 <header id="header"><nav>
-<a href="#inicio">Inicio</a><a href="#sinopsis">Sinopsis</a><a href="#proyecto">El Proyecto</a><a href="#fotogramas">Fotogramas</a>
+<a href="#inicio">Inicio</a><a href="#sinopsis">Sinopsis</a><a href="#proyecto">El Proyecto</a><a href="#fotogramas">Fotogramas</a><a href="#contacto">Contacto</a>
 </nav></header>
 
 <section class="hero" id="inicio">
@@ -119,6 +195,9 @@ p{font-size:16px}
 </div>
 <div class="production">Una producción de Victory Cine</div>
 </section>
+
+<!-- Flecha de scroll (solo móvil) -->
+<div id="scroll-arrow">⌄</div>
 
 <section id="sinopsis">
 <div class="container">
@@ -152,7 +231,15 @@ p{font-size:16px}
 </div>
 </section>
 
-<footer>© 2026 Victory Cine</footer>
+<footer id="contacto">
+
+CONTACTO<br>
+Tel: +549 341-6608336<br>
+
+	E-mail: victoryargentina@gmail.com<br>
+<br>
+<br>
+© 2026 Victory Cine </footer>
 
 <div id="modal-teaser">
 <div class="modal-content">
@@ -167,14 +254,109 @@ p{font-size:16px}
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
+/* ============================
+   LOADER CINEMATOGRÁFICO
+   Se oculta únicamente cuando el video de fondo
+   está reproduciéndose realmente en pantalla.
+   Usa una barra "falsa" que avanza de forma
+   asintótica hasta 90% mientras espera, y salta
+   a 100% recién cuando el video confirma reproducción.
+   Incluye un timeout de seguridad para nunca
+   quedar bloqueado (autoplay bloqueado, error de red, etc).
+   ============================ */
+(function(){
+  const loader=document.getElementById('loader');
+  const barFill=document.getElementById('loader-bar-fill');
+  const percentLabel=document.getElementById('loader-percent');
+  const bgVideo=document.querySelector('.fixed-video-bg');
+
+  let progress=0;
+  let loaderFinished=false;
+  let rafId=null;
+  let fallbackTimer=null;
+
+  function updateBar(value){
+    progress=value;
+    barFill.style.width=progress+'%';
+    percentLabel.textContent=Math.round(progress)+'%';
+  }
+
+  function animateFakeProgress(){
+    if(loaderFinished)return;
+    const remaining=90-progress;
+    progress+=Math.max(remaining*0.025,0.1);
+    if(progress>90)progress=90;
+    updateBar(progress);
+    rafId=requestAnimationFrame(animateFakeProgress);
+  }
+
+  function finishLoader(){
+    if(loaderFinished)return;
+    loaderFinished=true;
+    if(rafId)cancelAnimationFrame(rafId);
+    if(fallbackTimer)clearTimeout(fallbackTimer);
+    updateBar(100);
+    setTimeout(function(){
+      loader.classList.add('loader-fade-out');
+      document.body.classList.remove('loader-active');
+      setTimeout(function(){
+        if(loader.parentNode)loader.parentNode.removeChild(loader);
+      },700);
+    },200);
+  }
+
+  function isVideoActuallyPlaying(){
+    return !bgVideo.paused && !bgVideo.ended && bgVideo.readyState>2 && bgVideo.currentTime>0;
+  }
+
+  rafId=requestAnimationFrame(animateFakeProgress);
+
+  // Señal principal: el video confirma que está reproduciéndose.
+  bgVideo.addEventListener('playing',finishLoader,{once:true});
+
+  // Chequeo inmediato por si el evento "playing" ya ocurrió
+  // antes de que este script se ejecutara (ej: video cacheado).
+  if(isVideoActuallyPlaying())finishLoader();
+
+  // Red de seguridad: nunca quedar bloqueado en 0%
+  // (autoplay bloqueado por el navegador, error de carga, red lenta, etc).
+  fallbackTimer=setTimeout(finishLoader,5000);
+})();
+
+/* ============================
+   HEADER / SCROLL
+   ============================ */
 const h=document.getElementById('header');
-addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>60));
+addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+/* ============================
+   FLECHA DE SCROLL (MÓVIL)
+   ============================ */
+(function(){
+  const arrow=document.getElementById('scroll-arrow');
+  if(!arrow)return;
+  let arrowHidden=false;
+
+  function handleArrowScroll(){
+    if(arrowHidden)return;
+    if(scrollY>80){
+      arrowHidden=true;
+      arrow.classList.add('scroll-arrow-hidden');
+      window.removeEventListener('scroll',handleArrowScroll);
+      setTimeout(function(){
+        if(arrow.parentNode)arrow.parentNode.removeChild(arrow);
+      },600);
+    }
+  }
+  addEventListener('scroll',handleArrowScroll,{passive:true});
+})();
 
 // Modal Teaser con HLS.js
 const modalTeaser=document.getElementById('modal-teaser');
 const teaserBtn=document.getElementById('teaser-btn');
 const modalClose=document.getElementById('modal-close');
 const teaserPlayer=document.getElementById('teaser-player');
+let hlsInstance=null;
 
 teaserBtn.onclick=()=>{
   modalTeaser.classList.add('active');
@@ -195,17 +377,22 @@ modalTeaser.onclick=e=>{
 
 // Inicializar HLS.js
 function initializeHLS(){
+  if(hlsInstance){
+    // Ya inicializado, solo reproducir de nuevo
+    teaserPlayer.play();
+    return;
+  }
   const videoSrc='hls/video.m3u8';
-  
+
   if(Hls.isSupported()){
-    const hls=new Hls();
-    hls.loadSource(videoSrc);
-    hls.attachMedia(teaserPlayer);
-    hls.on(Hls.Events.MANIFEST_PARSED,function(){
+    hlsInstance=new Hls();
+    hlsInstance.loadSource(videoSrc);
+    hlsInstance.attachMedia(teaserPlayer);
+    hlsInstance.on(Hls.Events.MANIFEST_PARSED,function(){
       console.log('HLS manifest cargado correctamente');
       teaserPlayer.play();
     });
-    hls.on(Hls.Events.ERROR,function(event,data){
+    hlsInstance.on(Hls.Events.ERROR,function(event,data){
       console.error('Error en HLS:',data);
     });
   } else if(teaserPlayer.canPlayType('application/vnd.apple.mpegurl')){
