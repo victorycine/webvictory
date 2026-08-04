@@ -19,8 +19,24 @@ nav{display:flex;gap:40px}
 nav a{color:#fff;text-decoration:none;letter-spacing:3px;text-transform:uppercase;font-size:13px;font-family:Inter,sans-serif;font-weight:500}
 
 /* Video fijo de fondo */
-.fixed-video-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;object-fit:cover}
-.overlay-fixed{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.58);z-index:-1;pointer-events:none}
+.fixed-video-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    object-position:center center;
+    z-index:-2;
+    pointer-events:none;
+}
+.overlay-fixed{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.58);
+    z-index:-1;
+    pointer-events:none;
+}
 
 .hero{height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:140px 8%;margin-top:-35px;padding-top:175px;padding-bottom:35px;z-index:1}
 .hero-content{position:relative;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;flex:1}
@@ -68,9 +84,25 @@ p{font-size:16px}
 <body>
 
 <!-- Video de fondo fijo -->
-<video class="fixed-video-bg" autoplay muted loop playsinline>
-  <source src="videofondo.mp4" type="video/mp4">
+<video
+  class="fixed-video-bg"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="metadata"
+  disablepictureinpicture
+>
+  <!-- Se intentará reproducir primero el WebM -->
+  <source src="fondo.webm" type="video/webm">
+
+  <!-- Si el navegador no soporta WebM, usará el MP4 -->
+  <source src="fondo.mp4" type="video/mp4">
+
+  <!-- Mensaje para navegadores muy antiguos -->
+  Tu navegador no soporta videos HTML5.
 </video>
+
 <div class="overlay-fixed"></div>
 
 <header id="header"><nav>
