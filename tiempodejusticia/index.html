@@ -46,7 +46,11 @@ nav a{color:#fff;text-decoration:none;letter-spacing:3px;text-transform:uppercas
 .btn{border:1px solid #fff;padding:16px 40px;color:#fff;text-decoration:none;letter-spacing:4px;cursor:pointer;background:transparent;font-family:Inter,sans-serif;font-size:13px;transition:.3s;text-transform:uppercase;font-weight:500}
 .btn:hover{background:#fff;color:#000}
 .btn-disclaimer{font-size:12px;color:#999;line-height:1.6;font-weight:300;max-width:400px;letter-spacing:1px}
-.production{font-family:Inter,sans-serif;font-size:14px;position:relative;z-index:3;letter-spacing:2px;text-transform:uppercase;font-weight:400}
+.production{font-family:Inter,sans-serif;font-size:14px;position:relative;z-index:3;letter-spacing:2px;text-transform:uppercase;font-weight:400;text-align:center;  display:flex;
+  flex-direction:column;
+  align-items:center;}
+.victory-link{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.7);text-underline-offset:4px;padding:4px 10px;letter-spacing:2px;transition:.3s;display:inline-block}
+.victory-link:hover{background:#fff;color:#000;text-decoration:none}
 
 section{padding:140px 8%;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative;z-index:1}
 .container{max-width:1200px;margin:auto;width:100%;position:relative;z-index:3}
@@ -193,7 +197,8 @@ body.loader-active{overflow:hidden}
 <p class="btn-disclaimer">Material en desarrollo. La película se encuentra en etapa de postproducción y aún no cuenta con su versión final. Color, sonido, mezcla y efectos visuales serán completados en la etapa final.</p>
 </div>
 </div>
-<div class="production">Una producción de Victory Cine</div>
+<div class="production">Una producción de<br>
+<a href="https://victorycine.com" target="_blank" rel="noopener noreferrer" class="victory-link">Victory Cine</a></div>
 </section>
 
 <!-- Flecha de scroll (solo móvil) -->
@@ -237,7 +242,6 @@ CONTACTO<br>
 Tel: +549 341-6608336<br>
 
 	E-mail: victoryargentina@gmail.com<br>
-<br>
 <br>
 © 2026 Victory Cine </footer>
 
