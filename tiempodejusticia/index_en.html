@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TIME FOR JUSTICE | Film | Victory Cine</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{
+    scroll-behavior:smooth;
+    scrollbar-color:#1a1a1a #000;
+    scrollbar-width:thin
+}
+
+html::-webkit-scrollbar{width:10px}
+html::-webkit-scrollbar-track{background:#000}
+html::-webkit-scrollbar-thumb{background:#1a1a1a;border-radius:5px}
+html::-webkit-scrollbar-thumb:hover{background:#333}
+
+body{
+    background:#000;
+    color:#fff;
+    font-family:Inter,sans-serif;
+    overflow-x:hidden;
+    padding-top:35px
+}
+
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:35px;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+    transition:.4s
+}
+
+header.scrolled{
+    background:rgba(0,0,0,.6);
+    backdrop-filter:blur(10px)
+}
+
+nav{
+    display:flex;
+    gap:40px
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:13px;
+    font-family:Inter,sans-serif;
+    font-weight:500
+}
+
+/* ============================
+   FIXED BACKGROUND VIDEO
+   ============================ */
+
+.fixed-video-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    object-position:center center;
+    z-index:-2;
+    pointer-events:none
+}
+
+.overlay-fixed{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.58);
+    z-index:-1;
+    pointer-events:none
+}
+
+/* ============================
+   HERO
+   ============================ */
+
+.hero{
+    height:100vh;
+    min-height:700px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    padding:175px 8% 35px;
+    margin-top:-35px;
+    z-index:1
+}
+
+.hero-content{
+    position:relative;
+    z-index:3;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    flex:1;
+    width:100%
+}
+
+.hero-content img{
+    max-width:420px;
+    width:80%;
+    margin-bottom:30px;
+    margin-top:-12em
+}
+
+.btn-container{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:32px;
+    margin-top:20px;
+    width:100%
+}
+
+.btn{
+    border:1px solid #fff;
+    padding:16px 40px;
+    color:#fff;
+    text-decoration:none;
+    letter-spacing:4px;
+    cursor:pointer;
+    background:transparent;
+    font-family:Inter,sans-serif;
+    font-size:13px;
+    transition:.3s;
+    text-transform:uppercase;
+    font-weight:500;
+    white-space:nowrap
+}
+
+.btn:hover{
+    background:#fff;
+    color:#000
+}
+
+.btn-disclaimer{
+    font-size:12px;
+    color:#999;
+    line-height:1.6;
+    font-weight:300;
+    width:100%;
+    max-width:520px;
+    letter-spacing:1px;
+    text-align:center;
+    margin:0 auto
+}
+
+.production{
+    font-family:Inter,sans-serif;
+    font-size:14px;
+    position:relative;
+    z-index:3;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-weight:400;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center
+}
+
+.victory-link{
+    color:#fff;
+    text-decoration:underline;
+    text-decoration-color:rgba(255,255,255,.7);
+    text-underline-offset:4px;
+    padding:4px 10px;
+    letter-spacing:2px;
+    transition:.3s;
+    display:inline-block
+}
+
+.victory-link:hover{
+    background:#fff;
+    color:#000;
+    text-decoration:none
+}
+
+/* ============================
+   GENERAL SECTIONS
+   ============================ */
+
+section{
+    padding:140px 8%;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    flex-direction:column;
+    position:relative;
+    z-index:1
+}
+
+.container{
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+    position:relative;
+    z-index:3
+}
+
+h2{
+    font-family:Inter,sans-serif;
+    font-size:48px;
+    text-align:center;
+    margin-bottom:50px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-weight:500
+}
+
+p{
+    color:#cfcfcf;
+    font-size:18px;
+    line-height:1.9;
+    text-align:center;
+    font-family:Inter,sans-serif;
+    font-weight:300
+}
+
+.dark{
+    background:#050505
+}
+
+blockquote{
+    margin-top:70px;
+    text-align:center;
+    font-family:Inter,sans-serif;
+    font-size:24px;
+    font-style:italic;
+    letter-spacing:2px;
+    font-weight:300
+}
+
+/* ============================
+   SYNOPSIS
+   ============================ */
+
+#sinopsis{
+    min-height:100vh;
+    padding:150px 8% 140px;
+    align-items:center;
+    justify-content:flex-start
+}
+
+#sinopsis .container{
+    margin-top:0
+}
+
+#sinopsis p{
+    max-width:950px;
+    margin:0 auto
+}
+
+/* ============================
+   PROJECT
+   ============================ */
+
+#proyecto{
+    min-height:100vh;
+    padding:120px 8% 140px;
+    align-items:center;
+    justify-content:flex-start
+}
+
+#proyecto .container{
+    margin-top:0
+}
+
+#proyecto p{
+    max-width:1050px;
+    margin:0 auto;
+    text-align:center
+}
+
+/* ============================
+   GALLERY
+   ============================ */
+
+#fotogramas{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    min-height:600px;
+    padding:0;
+    margin:0;
+    left:50%;
+    right:50%;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    background:#000;
+    z-index:2;
+    padding-top:35px;
+    margin-top:-35px
+}
+
+.gallery-main{
+    display:flex;
+    width:100%;
+    flex:1;
+    min-height:0;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden
+}
+
+.gallery-main img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:all .6s cubic-bezier(.4,0,.2,1)
+}
+
+.gallery-bottom{
+    display:flex;
+    width:100%;
+    height:12%;
+    min-height:70px;
+    gap:0;
+    overflow-x:auto;
+    overflow-y:hidden;
+    background:#050505
+}
+
+.gallery-thumb{
+    position:relative;
+    cursor:pointer;
+    transition:all .6s cubic-bezier(.4,0,.2,1);
+    overflow:hidden;
+    border:1px solid #1a1a1a;
+    flex:1;
+    min-width:0;
+    height:100%
+}
+
+.gallery-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:transform .3s ease
+}
+
+.gallery-thumb:hover img{
+    transform:scale(1.1)
+}
+
+.gallery-thumb.active{
+    border:2px solid #fff;
+    box-shadow:inset 0 0 0 2px #fff
+}
+
+/* ============================
+   LIGHTBOX
+   ============================ */
+
+#lightbox{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:999;
+    justify-content:center;
+    align-items:center
+}
+
+#lightbox img{
+    max-width:95%;
+    max-height:95%
+}
+
+#close{
+    position:absolute;
+    top:25px;
+    right:35px;
+    font-size:40px;
+    cursor:pointer
+}
+
+/* ============================
+   TEASER MODAL
+   ============================ */
+
+#modal-teaser{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    z-index:998;
+    justify-content:center;
+    align-items:center;
+    padding:20px
+}
+
+#modal-teaser.active{
+    display:flex
+}
+
+.modal-content{
+    position:relative;
+    width:100%;
+    max-width:1000px;
+    aspect-ratio:16/9
+}
+
+.modal-close{
+    position:absolute;
+    top:-40px;
+    right:0;
+    font-size:40px;
+    cursor:pointer;
+    color:#fff;
+    z-index:999
+}
+
+#teaser-player{
+    width:100%;
+    height:100%;
+    background:#000
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+
+footer{
+    text-align:center;
+    padding:60px;
+    color:#888;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:Inter,sans-serif;
+    font-size:13px;
+    line-height:2;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:400;
+    background:#000;
+    position:relative;
+    z-index:1
+}
+
+/* ============================
+   CINEMATIC LOADER
+   ============================ */
+
+#loader{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:5000;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    transition:opacity .7s ease
+}
+
+#loader.loader-fade-out{
+    opacity:0;
+    pointer-events:none
+}
+
+.loader-bar-track{
+    width:220px;
+    height:1px;
+    background:rgba(255,255,255,.15);
+    overflow:hidden;
+    position:relative
+}
+
+.loader-bar-fill{
+    height:100%;
+    width:0%;
+    background:#fff
+}
+
+.loader-percent{
+    margin-top:18px;
+    font-family:Inter,sans-serif;
+    font-size:12px;
+    letter-spacing:4px;
+    font-weight:300;
+    color:#fff
+}
+
+body.loader-active{
+    overflow:hidden
+}
+
+/* ============================
+   SCROLL ARROW - MOBILE
+   ============================ */
+
+#scroll-arrow{
+    display:none;
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:Inter,sans-serif;
+    font-size:26px;
+    color:#fff;
+    z-index:50;
+    line-height:1;
+    animation:scrollArrowFloat 1.8s ease-in-out infinite;
+    transition:opacity .5s ease;
+    pointer-events:none
+}
+
+#scroll-arrow.scroll-arrow-hidden{
+    opacity:0
+}
+
+@keyframes scrollArrowFloat{
+    0%,100%{transform:translate(-50%,0)}
+    50%{transform:translate(-50%,10px)}
+}
+
+/* ============================
+   MOBILE
+   ============================ */
+
+@media(max-width:768px){
+
+    nav{
+        display:none
+    }
+
+    h2{
+        font-size:36px;
+        margin-bottom:40px;
+        letter-spacing:3px
+    }
+
+    p{
+        font-size:16px;
+        line-height:1.8
+    }
+
+    .hero{
+        min-height:650px;
+        height:100vh;
+        padding:100px 8% 35px
+    }
+
+    .hero-content img{
+        width:85%;
+        margin-top:-7em;
+        margin-bottom:25px
+    }
+
+    .btn-container{
+        gap:25px;
+        margin-top:10px
+    }
+
+    .btn{
+        padding:15px 25px;
+        font-size:11px;
+        letter-spacing:3px
+    }
+
+    .btn-disclaimer{
+        width:100%;
+        max-width:360px;
+        font-size:11px;
+        line-height:1.6;
+        text-align:center
+    }
+
+    .production{
+        font-size:12px
+    }
+
+    #sinopsis{
+        min-height:auto;
+        padding:120px 8% 120px
+    }
+
+    #sinopsis p{
+        max-width:100%
+    }
+
+    #proyecto{
+        min-height:auto;
+        padding:120px 8% 120px
+    }
+
+    #proyecto p{
+        max-width:100%;
+        text-align:center
+    }
+
+    #fotogramas{
+        height:100vh;
+        min-height:500px
+    }
+
+    .gallery-bottom{
+        height:14%;
+        min-height:65px
+    }
+
+    .gallery-thumb{
+        min-width:90px
+    }
+
+    .modal-close{
+        top:15px;
+        right:15px;
+        font-size:32px
+    }
+
+    footer{
+        min-height:70vh;
+        padding:40px 20px;
+        font-size:11px;
+        line-height:2.2
+    }
+
+    #scroll-arrow{
+        display:block
+    }
+}
+
+/* ============================
+   SMALL MOBILE
+   ============================ */
+
+@media(max-width:480px){
+
+    .hero{
+        padding-left:6%;
+        padding-right:6%
+    }
+
+    .hero-content img{
+        width:90%;
+        margin-top:-5em
+    }
+
+    .btn{
+        padding:14px 20px;
+        font-size:10px;
+        letter-spacing:2.5px
+    }
+
+    .btn-disclaimer{
+        max-width:330px;
+        font-size:10px
+    }
+
+    h2{
+        font-size:30px;
+        letter-spacing:2px
+    }
+
+    #sinopsis,
+    #proyecto{
+        padding-left:7%;
+        padding-right:7%
+    }
+
+    p{
+        font-size:15px
+    }
+}
+</style>
+
+</head>
+
+<body class="loader-active">
+
+<!-- Cinematic loader -->
+
+<div id="loader">
+<div class="loader-bar-track">
+<div class="loader-bar-fill" id="loader-bar-fill"></div>
+</div>
+<div class="loader-percent" id="loader-percent">0%</div>
+</div>
+
+<!-- Fixed background video -->
+
+<video
+class="fixed-video-bg"
+autoplay
+muted
+loop
+playsinline
+preload="metadata"
+disablepictureinpicture
+
+>
+
+  <!-- WebM will be attempted first -->
+
+  <source src="fondo.webm" type="video/webm">
+
+  <!-- If the browser does not support WebM, MP4 will be used -->
+
+  <source src="fondo.mp4" type="video/mp4">
+
+  <!-- Message for very old browsers -->
+
+Your browser does not support HTML5 video. </video>
+
+<div class="overlay-fixed"></div>
+
+<header id="header">
+<nav>
+<a href="#inicio">Home</a>
+<a href="#sinopsis">Synopsis</a>
+<a href="#proyecto">The Project</a>
+<a href="#fotogramas">Stills</a>
+<a href="#contacto">Contact</a>
+</nav>
+</header>
+
+<section class="hero" id="inicio">
+
+<div class="hero-content">
+
+<img src="titulo.png" alt="Time for Justice logo">
+
+<div class="btn-container">
+
+<button class="btn" id="teaser-btn">
+WATCH WORK IN PROGRESS
+</button>
+
+<p class="btn-disclaimer">
+Material in development. The film is currently in post-production and does not yet have its final version. Color grading, sound, mixing, and visual effects will be completed during the final stage.
+</p>
+
+</div>
+</div>
+
+<div class="production">
+A production by<br>
+<a href="https://victorycine.com" target="_blank" rel="noopener noreferrer" class="victory-link">
+Victory Cine
+</a>
+</div>
+
+</section>
+
+<!-- Scroll arrow (mobile only) -->
+
+<div id="scroll-arrow">⌄</div>
+
+<!-- ============================
+     SYNOPSIS
+     ============================ -->
+
+<section id="sinopsis">
+
+<div class="container">
+
+<h2>SYNOPSIS</h2>
+
+<p>
+Years after the murder of his wife, Víctor, a former police officer consumed by guilt and a desire for justice, receives a new lead about the person responsible for the crime.
+<br><br>
+Determined to put an end to the search that has defined his life, he infiltrates a dangerous criminal organization where he discovers Camila, a young woman who has been kidnapped by the gang.
+<br><br>
+From that moment on, what began as a mission of revenge becomes a desperate race to rescue her, as he confronts a web of violence, corruption, and secrets that will test everything he once believed in.
+</p>
+
+</div>
+
+</section>
+
+<!-- ============================
+     THE PROJECT
+     ============================ -->
+
+<section id="proyecto">
+
+<div class="container">
+
+<h2>THE PROJECT</h2>
+
+<p>
+Time for Justice is an independent action feature film with a strong dramatic component, produced by Victory Cine. The story takes place in the city of Rosario, which becomes the main setting for an uncommon proposal within Argentine cinema: an action thriller that combines high-impact sequences with characters shaped by pain, loss, and the search for justice.
+<br><br>
+With more than 90% of the film already shot, the project is moving toward its final stage of production. The plan includes participation in international film festivals, a promotional strategy through paid advertising campaigns on social media, and a theatrical release.
+<br><br>
+Previous productions by Victory Cine have been selected at festivals in the United States, Spain, the United Kingdom, and India, and have also had in-person screenings as part of the festival circuit in Argentina.
+<br><br>
+At this stage, the project is seeking partnerships with producers, companies, and brands that wish to associate themselves with a film with national and international reach potential.
+<br><br>
+In addition to their participation as sponsors, partners will receive communication initiatives and content specifically developed to enhance their brand visibility during the launch of the project.
+</p>
+
+</div>
+
+</section>
+
+<!-- ============================
+     STILLS
+     ============================ -->
+
+<section id="fotogramas">
+
+<div class="gallery-main">
+
+<img
+id="main-img"
+src="img/01.jpg"
+alt="Main film still"
+
+>
+
+</div>
+
+<div class="gallery-bottom" id="thumbnails-bottom">
+
+<div class="gallery-thumb active" data-src="img/01.jpg">
+<img src="img/01.jpg" alt="Film still 1">
+</div>
+
+<div class="gallery-thumb" data-src="img/02.jpg">
+<img src="img/02.jpg" alt="Film still 2">
+</div>
+
+<div class="gallery-thumb" data-src="img/03.jpg">
+<img src="img/03.jpg" alt="Film still 3">
+</div>
+
+<div class="gallery-thumb" data-src="img/04.jpg">
+<img src="img/04.jpg" alt="Film still 4">
+</div>
+
+<div class="gallery-thumb" data-src="img/05.jpg">
+<img src="img/05.jpg" alt="Film still 5">
+</div>
+
+<div class="gallery-thumb" data-src="img/06.jpg">
+<img src="img/06.jpg" alt="Film still 6">
+</div>
+
+<div class="gallery-thumb" data-src="img/07.jpg">
+<img src="img/07.jpg" alt="Film still 7">
+</div>
+
+<div class="gallery-thumb" data-src="img/08.jpg">
+<img src="img/08.jpg" alt="Film still 8">
+</div>
+
+<div class="gallery-thumb" data-src="img/09.jpg">
+<img src="img/09.jpg" alt="Film still 9">
+</div>
+
+<div class="gallery-thumb" data-src="img/10.jpg" alt="Film still 10">
+<img src="img/10.jpg" alt="Film still 10">
+</div>
+
+</div>
+
+</section>
+
+<!-- ============================
+     CONTACT
+     ============================ -->
+
+<footer id="contacto">
+
+CONTACT<br>
+Tel: +549 341-6608336<br>
+E-mail: [victoryargentina@gmail.com](mailto:victoryargentina@gmail.com)<br> <br>
+© 2026 Victory Cine
+
+</footer>
+
+<!-- ============================
+     TEASER MODAL
+     ============================ -->
+
+<div id="modal-teaser">
+
+<div class="modal-content">
+
+<span class="modal-close" id="modal-close">✕</span>
+
+<video id="teaser-player" controls></video>
+
+</div>
+
+</div>
+
+<!-- ============================
+     LIGHTBOX
+     ============================ -->
+
+<div id="lightbox">
+<span id="close">✕</span>
+<img id="lbimg">
+</div>
+
+<!-- HLS.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+
+/* ============================
+   CINEMATIC LOADER
+
+   Hides only when the background video
+   is actually playing on screen.
+   ============================ */
+
+(function(){
+
+  const loader=document.getElementById('loader');
+  const barFill=document.getElementById('loader-bar-fill');
+  const percentLabel=document.getElementById('loader-percent');
+  const bgVideo=document.querySelector('.fixed-video-bg');
+
+  let progress=0;
+  let loaderFinished=false;
+  let rafId=null;
+  let fallbackTimer=null;
+
+  function updateBar(value){
+
+    progress=value;
+    barFill.style.width=progress+'%';
+    percentLabel.textContent=Math.round(progress)+'%';
+
+  }
+
+  function animateFakeProgress(){
+
+    if(loaderFinished)return;
+
+    const remaining=90-progress;
+
+    progress+=Math.max(remaining*0.025,0.1);
+
+    if(progress>90)progress=90;
+
+    updateBar(progress);
+
+    rafId=requestAnimationFrame(animateFakeProgress);
+
+  }
+
+  function finishLoader(){
+
+    if(loaderFinished)return;
+
+    loaderFinished=true;
+
+    if(rafId)cancelAnimationFrame(rafId);
+
+    if(fallbackTimer)clearTimeout(fallbackTimer);
+
+    updateBar(100);
+
+    setTimeout(function(){
+
+      loader.classList.add('loader-fade-out');
+
+      document.body.classList.remove('loader-active');
+
+      setTimeout(function(){
+
+        if(loader.parentNode){
+          loader.parentNode.removeChild(loader);
+        }
+
+      },700);
+
+    },200);
+
+  }
+
+  function isVideoActuallyPlaying(){
+
+    return !bgVideo.paused &&
+           !bgVideo.ended &&
+           bgVideo.readyState>2 &&
+           bgVideo.currentTime>0;
+
+  }
+
+  rafId=requestAnimationFrame(animateFakeProgress);
+
+  bgVideo.addEventListener(
+    'playing',
+    finishLoader,
+    {once:true}
+  );
+
+  if(isVideoActuallyPlaying()){
+    finishLoader();
+  }
+
+  fallbackTimer=setTimeout(
+    finishLoader,
+    5000
+  );
+
+})();
+
+/* ============================
+   HEADER / SCROLL
+   ============================ */
+
+const h=document.getElementById('header');
+
+addEventListener(
+  'scroll',
+  ()=>h.classList.toggle('scrolled',scrollY>60),
+  {passive:true}
+);
+
+/* ============================
+   SCROLL ARROW - MOBILE
+   ============================ */
+
+(function(){
+
+  const arrow=document.getElementById('scroll-arrow');
+
+  if(!arrow)return;
+
+  let arrowHidden=false;
+
+  function handleArrowScroll(){
+
+    if(arrowHidden)return;
+
+    if(scrollY>80){
+
+      arrowHidden=true;
+
+      arrow.classList.add('scroll-arrow-hidden');
+
+      window.removeEventListener(
+        'scroll',
+        handleArrowScroll
+      );
+
+      setTimeout(function(){
+
+        if(arrow.parentNode){
+          arrow.parentNode.removeChild(arrow);
+        }
+
+      },600);
+
+    }
+
+  }
+
+  addEventListener(
+    'scroll',
+    handleArrowScroll,
+    {passive:true}
+  );
+
+})();
+
+/* ============================
+   TEASER MODAL WITH HLS.JS
+   ============================ */
+
+const modalTeaser=document.getElementById('modal-teaser');
+const teaserBtn=document.getElementById('teaser-btn');
+const modalClose=document.getElementById('modal-close');
+const teaserPlayer=document.getElementById('teaser-player');
+
+let hlsInstance=null;
+
+teaserBtn.onclick=()=>{
+
+  modalTeaser.classList.add('active');
+
+  initializeHLS();
+
+};
+
+modalClose.onclick=()=>{
+
+  modalTeaser.classList.remove('active');
+
+  teaserPlayer.pause();
+
+};
+
+modalTeaser.onclick=e=>{
+
+  if(e.target===modalTeaser){
+
+    modalTeaser.classList.remove('active');
+
+    teaserPlayer.pause();
+
+  }
+
+};
+
+/* ============================
+   INITIALIZE HLS.JS
+   ============================ */
+
+function initializeHLS(){
+
+  if(hlsInstance){
+
+    teaserPlayer.play();
+
+    return;
+
+  }
+
+  const videoSrc='hls/video.m3u8';
+
+  if(Hls.isSupported()){
+
+    hlsInstance=new Hls();
+
+    hlsInstance.loadSource(videoSrc);
+
+    hlsInstance.attachMedia(teaserPlayer);
+
+    hlsInstance.on(
+      Hls.Events.MANIFEST_PARSED,
+      function(){
+
+        console.log(
+          'HLS manifest loaded successfully'
+        );
+
+        teaserPlayer.play();
+
+      }
+    );
+
+    hlsInstance.on(
+      Hls.Events.ERROR,
+      function(event,data){
+
+        console.error(
+          'HLS error:',
+          data
+        );
+
+      }
+    );
+
+  }else if(
+    teaserPlayer.canPlayType(
+      'application/vnd.apple.mpegurl'
+    )
+  ){
+
+    teaserPlayer.src=videoSrc;
+
+    teaserPlayer.play();
+
+  }
+
+}
+
+/* ============================
+   GALLERY
+   ============================ */
+
+const mainImg=document.getElementById('main-img');
+
+const allThumbs=document.querySelectorAll(
+  '.gallery-thumb'
+);
+
+allThumbs.forEach(thumb=>{
+
+  thumb.addEventListener(
+    'click',
+    ()=>{
+
+      const newSrc=thumb.dataset.src;
+
+      mainImg.style.opacity='0';
+
+      setTimeout(()=>{
+
+        mainImg.src=newSrc;
+
+        mainImg.style.opacity='1';
+
+      },300);
+
+      document
+        .querySelectorAll('.gallery-thumb')
+        .forEach(
+          t=>t.classList.remove('active')
+        );
+
+      thumb.classList.add('active');
+
+    }
+  );
+
+});
+
+/* ============================
+   LIGHTBOX - DOUBLE CLICK
+   ============================ */
+
+const lb=document.getElementById('lightbox');
+
+const img=document.getElementById('lbimg');
+
+mainImg.ondblclick=()=>{
+
+  img.src=mainImg.src;
+
+  lb.style.display='flex';
+
+};
+
+document
+  .querySelectorAll('.gallery-thumb img')
+  .forEach(
+    i=>{
+
+      i.ondblclick=()=>{
+
+        img.src=i.src;
+
+        lb.style.display='flex';
+
+      };
+
+    }
+  );
+
+document.getElementById('close').onclick=()=>{
+
+  lb.style.display='none';
+
+};
+
+lb.onclick=e=>{
+
+  if(e.target===lb){
+
+    lb.style.display='none';
+
+  }
+
+};
+
+</script>
+
+</body>
+</html>
