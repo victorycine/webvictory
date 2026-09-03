@@ -1,0 +1,962 @@
+:root{
+  --bg: #0b0b0b;
+  --panel: #121010;
+  --text: #e6e6e6;
+  --muted: #a9a9a9;
+  --accent: #bfc8cc;
+
+  --max-width: 920px;
+  --gutter: 28px;
+
+  --heading-font: 'Bebas Neue', sans-serif;
+  --body-font: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+  /* Behind the scenes */
+  --behind-image-width: 30vw;
+}
+
+
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  height:100%;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body-font);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+
+
+/* =========================================================
+   MASTHEAD / LOGO
+   ========================================================= */
+
+.masthead{
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  padding:8px 0;
+}
+
+.masthead-inner{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 var(--gutter);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.logo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo-img{
+  height:40px;
+  width:auto;
+  max-width:220px;
+  display:block;
+  object-fit:contain;
+}
+
+
+/* Decorative dots */
+
+.dots{
+  width:140px;
+  height:80px;
+  background-image:
+    radial-gradient(
+      rgba(255,255,255,0.03) 6px,
+      transparent 6px
+    );
+  background-size:18px 18px;
+  opacity:0.9;
+  position:absolute;
+  pointer-events:none;
+}
+
+.corner.top-right{
+  right:0;
+  top:6px;
+  transform:translateX(-6px);
+}
+
+.corner.bottom-right{
+  right:0;
+  bottom:12px;
+  transform:translateX(-6px);
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+   ========================================================= */
+
+.page{
+  padding:48px 0;
+}
+
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 var(--gutter);
+  display:block;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.page-hero{
+  min-height:calc(100vh - 64px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+
+.hero-wrap{
+  text-align:center;
+  padding:20px 0 30px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+
+/* =========================================================
+   PRESS RELEASE
+   ========================================================= */
+
+.kicker{
+  color:var(--muted);
+  letter-spacing:3px;
+  font-weight:600;
+  margin-top:-35px;
+  margin-bottom:0;
+  line-height:1.1;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+/*
+   El título ocupa aproximadamente el 50%
+   del ancho de la pantalla.
+*/
+
+.title-img-wrap{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  width:100%;
+
+  /* Pequeño espacio entre PRESS RELEASE y el título */
+  margin:10px 0 4px;
+}
+
+.title-img{
+  width:30vw !important;
+  max-width:30vw !important;
+
+  height:auto !important;
+  max-height:none !important;
+
+  display:block;
+  margin:0 auto;
+}
+
+
+/* =========================================================
+   HEARTBEAT
+   ========================================================= */
+
+@keyframes heartbeat{
+
+  0%{
+    transform:scale(1);
+  }
+
+  25%{
+    transform:scale(0.92);
+  }
+
+  50%{
+    transform:scale(1.06);
+  }
+
+  75%{
+    transform:scale(0.97);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+.heartbeat{
+  animation:
+    heartbeat 10s cubic-bezier(.42,0,.58,1) infinite;
+
+  transform-origin:center;
+}
+
+@media (prefers-reduced-motion: reduce){
+
+  .heartbeat{
+    animation:none;
+    transform:none;
+  }
+
+}
+
+
+/* =========================================================
+   ORIGINAL TITLE / SUBTITLE
+   ========================================================= */
+
+.original{
+  color:var(--muted);
+
+  margin:0 0 18px;
+
+  letter-spacing:2px;
+  font-size:0.95rem;
+
+  line-height:1.1;
+}
+
+.subtitle{
+  color:var(--text);
+
+  font-weight:600;
+
+  margin:0 0 12px;
+}
+
+
+/* =========================================================
+   SOCIAL
+   ========================================================= */
+
+.social{
+  display:inline-flex;
+
+  gap:12px;
+
+  align-items:center;
+
+  margin:12px 0 8px;
+
+  color:var(--muted);
+
+  justify-content:center;
+}
+
+.icon{
+  width:26px;
+  height:26px;
+  display:block;
+}
+
+a.social-handle{
+  color:var(--muted);
+
+  font-weight:600;
+
+  letter-spacing:1px;
+
+  text-decoration:none;
+}
+
+
+/* =========================================================
+   MEDIA BLOCKS
+   ========================================================= */
+
+.media-block{
+  margin-bottom:48px;
+}
+
+
+/* Full width image */
+
+.full-bleed{
+  box-sizing:border-box;
+
+  width:100vw;
+
+  position:relative;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:#000;
+
+  margin:0;
+}
+
+.full-bleed .still-img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+
+/* =========================================================
+   TEXT UNDER IMAGES
+   ========================================================= */
+
+.plot{
+  width:85%;
+
+  max-width:900px;
+
+  margin:18px auto 0;
+
+  color:var(--muted);
+}
+
+.plot h2{
+  font-family:var(--heading-font);
+
+  letter-spacing:2px;
+
+  margin:0 0 12px;
+
+  font-size:20px;
+
+  color:var(--text);
+}
+
+.plot p{
+  margin:0;
+
+  font-size:1.09rem;
+
+  line-height:1.75;
+
+  color:var(--muted);
+}
+
+
+/* =========================================================
+   LONG TEXT
+   ========================================================= */
+
+.page-text .longtext{
+  max-width:760px;
+
+  margin:30px auto;
+
+  color:var(--muted);
+
+  font-size:1.09rem;
+
+  line-height:1.75;
+}
+
+
+/* =========================================================
+   BEHIND THE SCENES
+   ========================================================= */
+
+.container.behind-grid{
+
+  box-sizing:border-box;
+
+  width:100vw;
+
+  max-width:none;
+
+  margin-left:50%;
+
+  transform:translateX(-50%);
+
+  padding:12px 0;
+
+  display:flex;
+
+  flex-direction:row;
+
+  align-items:flex-start;
+
+  justify-content:center;
+
+  gap:28px;
+}
+
+
+/* =========================================================
+   TÍTULO VERTICAL
+   ========================================================= */
+
+.container.behind-grid > .vertical-label{
+
+  /*
+     Vertical real:
+     una letra debajo de la otra.
+  */
+
+  writing-mode:vertical-rl;
+
+  /*
+     Mantiene cada letra derecha,
+     no girada.
+  */
+
+  text-orientation:upright;
+
+  transform:none;
+
+  align-self:flex-start;
+
+  display:block;
+
+  width:auto;
+
+  padding:0;
+
+  margin:0;
+
+  /*
+     Una única línea vertical.
+  */
+
+  white-space:nowrap;
+
+  text-align:center;
+
+  font-family:var(--heading-font);
+
+  font-size:42px;
+
+  letter-spacing:3px;
+
+  line-height:1;
+
+  color:var(--muted);
+
+  /*
+     Alineación con el comienzo
+     de la primera fotografía.
+  */
+
+  padding-top:6px;
+}
+
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+
+.container.behind-grid > .behind-gallery-vertical{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:22px;
+
+  align-items:center;
+
+  width:min(var(--behind-image-width), 900px);
+
+  box-sizing:border-box;
+
+  margin:0;
+
+  padding:0;
+}
+
+
+/* Each photograph */
+
+.container.behind-grid .behind-item{
+
+  width:100%;
+
+  overflow:hidden;
+
+  border:6px solid rgba(255,255,255,0.02);
+
+  background:#111;
+
+  display:flex;
+
+  justify-content:center;
+
+  margin:0;
+}
+
+.container.behind-grid .behind-item img{
+
+  width:100%;
+
+  height:auto;
+
+  display:block;
+}
+
+
+/* =========================================================
+   TABLET / NOTEBOOK
+   ========================================================= */
+
+@media (max-width:980px){
+
+  /*
+     El título sigue siendo proporcional
+     al ancho de la pantalla.
+  */
+
+  .title-img-wrap{
+    margin:-6px 0 4px;
+  }
+
+  .title-img{
+    width:30vw !important;
+    max-width:30vw !important;
+  }
+
+
+  /* Behind the scenes */
+
+  .container.behind-grid{
+
+    width:100vw;
+
+    margin-left:50%;
+
+    transform:translateX(-50%);
+
+    gap:18px;
+  }
+
+  .container.behind-grid > .vertical-label{
+
+    font-size:32px;
+
+    letter-spacing:2px;
+
+    padding-top:4px;
+  }
+
+  .container.behind-grid > .behind-gallery-vertical{
+
+    width:65vw;
+
+    max-width:700px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:700px){
+
+  /*
+     En pantallas pequeñas el título
+     sigue ocupando el 50% del ancho.
+  */
+
+  .title-img{
+    width:30vw !important;
+    max-width:30vw !important;
+  }
+
+
+  /*
+     Behind the scenes sigue siendo vertical.
+  */
+
+  .container.behind-grid{
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:14px;
+  }
+
+  .container.behind-grid > .vertical-label{
+
+    writing-mode:vertical-rl;
+
+    text-orientation:upright;
+
+    font-size:30px;
+
+    letter-spacing:2px;
+
+    padding-top:0;
+
+    align-self:center;
+  }
+
+  .container.behind-grid > .behind-gallery-vertical{
+
+    width:90vw;
+
+    max-width:none;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE PEQUEÑO
+   ========================================================= */
+
+@media (max-width:520px){
+
+  .masthead{
+    padding:6px 0;
+  }
+
+  .logo-img{
+    height:34px;
+  }
+
+
+  /* Hero */
+
+  .page-hero{
+    min-height:calc(100vh - 52px);
+  }
+
+  .hero-wrap{
+    padding:15px 0 25px;
+  }
+
+  .kicker{
+    font-size:0.82rem;
+
+    letter-spacing:2.5px;
+  }
+
+
+  /* Título */
+
+  .title-img-wrap{
+
+    margin:-4px 0 4px;
+  }
+
+  .title-img{
+
+    width:30vw !important;
+
+    max-width:30vw !important;
+
+    max-height:none !important;
+  }
+
+
+  .original{
+
+    font-size:0.82rem;
+
+    margin:3px 0 14px;
+
+    letter-spacing:1.5px;
+  }
+
+  .subtitle{
+
+    font-size:0.9rem;
+  }
+
+
+  /* Media */
+
+  .plot{
+
+    width:90%;
+  }
+
+  .plot h2{
+
+    font-size:18px;
+  }
+
+  .plot p{
+
+    font-size:1rem;
+
+    line-height:1.65;
+  }
+
+
+  /* Behind */
+
+  .container.behind-grid > .vertical-label{
+
+    font-size:25px;
+
+    letter-spacing:2px;
+
+    padding-top:0;
+  }
+
+  .container.behind-grid > .behind-gallery-vertical{
+
+    width:92vw;
+  }
+
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+/* Evita cualquier barra de desplazamiento horizontal */
+html,
+body{
+  overflow-x:hidden;
+}
+
+/* Scrollbar vertical en tonos oscuros */
+html{
+  scrollbar-width:thin;
+  scrollbar-color:#252525 #080808;
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-track{
+  background:#080808;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#252525;
+  border-radius:0;
+  border:2px solid #080808;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#353535;
+}
+
+
+/* =========================================================
+   FOOTER / COPYRIGHT
+   ========================================================= */
+
+.site-footer{
+  text-align:center;
+  color:#666;
+  font-size:0.72rem;
+  letter-spacing:1.5px;
+  padding:28px 20px 32px;
+  margin:0;
+}
+
+/* =========================================================
+   SCROLL INDICATOR — TECHNO
+   ========================================================= */
+
+.scroll-indicator{
+  position:fixed;
+  left:50%;
+  bottom:26px;
+  transform:translateX(-50%);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  z-index:9999;
+  pointer-events:none;
+
+  color:rgba(255,255,255,0.32);
+
+  opacity:1;
+
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* Línea */
+
+.scroll-line{
+  position:relative;
+
+  width:10px;
+  height:42px;
+
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0.35),
+    rgba(255,255,255,0)
+  );
+
+  overflow:visible;
+}
+
+/* Punto luminoso que recorre la línea */
+
+.scroll-dot{
+  position:absolute;
+
+  left:50%;
+  top:0;
+
+  width:4px;
+  height:4px;
+
+  transform:translateX(-50%);
+
+  background:rgba(255,255,255,0.65);
+
+  box-shadow:
+    0 0 6px rgba(255,255,255,0.25);
+
+  animation:scrollScan 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollScan{
+
+  0%{
+    top:0;
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  70%{
+    opacity:1;
+  }
+
+  100%{
+    top:38px;
+    opacity:0;
+  }
+
+}
+
+/* Texto */
+
+.scroll-indicator span{
+  margin-top:7px;
+
+  font-family:var(--body-font);
+
+  font-size:7px;
+  font-weight:600;
+
+  letter-spacing:3px;
+
+  color:rgba(255,255,255,0.30);
+}
+
+/* Desaparece al hacer scroll */
+
+.scroll-indicator.hidden{
+  opacity:0;
+  transform:translate(-50%, 12px);
+}
+
+/* Mobile */
+
+@media (max-width:520px){
+
+  .scroll-indicator{
+    bottom:18px;
+  }
+
+  .scroll-line{
+    height:34px;
+  }
+
+  .scroll-dot{
+    width:3px;
+    height:3px;
+  }
+
+  @keyframes scrollScan{
+
+    0%{
+      top:0;
+      opacity:0;
+    }
+
+    20%{
+      opacity:1;
+    }
+
+    70%{
+      opacity:1;
+    }
+
+    100%{
+      top:30px;
+      opacity:0;
+    }
+
+  }
+
+}
+
+/* =========================================================
+   PHOTO CAPTIONS
+   ========================================================= */
+
+.photo-caption{
+  width:100%;
+
+  text-align:right;
+
+  color:#777;
+
+  font-family:var(--body-font);
+
+  font-size:0.82rem;
+
+  font-weight:400;
+
+  letter-spacing:1px;
+
+  margin:7px 0 0;
+
+  padding:0 3px;
+}
